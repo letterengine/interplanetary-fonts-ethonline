@@ -1,0 +1,62 @@
+:root {
+  --red: #ff3b6a;
+  --yellow: #ffff5a;
+  --cyan: #32f9e1;
+  --darkblue: #020866;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: var(--darkblue);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 4.5rem;
+}
+
+h3 {
+  font-size: 4rem;
+}
+
+h4 {
+  font-size: 3.5rem;
+}
+
+h5 {
+  font-size: 3rem;
+}
+
+h6 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 600;
+}
