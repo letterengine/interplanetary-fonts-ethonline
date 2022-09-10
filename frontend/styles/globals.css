@@ -6,7 +6,7 @@
   --cyan: #32f9e1;
   --darkblue: #020866;
   /* Global values */
-  --container-radius: 4px;
+  --global-radius: 4px;
 }
 
 * {
