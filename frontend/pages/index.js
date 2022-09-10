@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.app}>
       <Head>
-        <title>InterplanetaryFont</title>
+        <title>InterplanetaryFonts</title>
         <meta
           name='description'
           content='Web App created during ETHOnline 2022'
