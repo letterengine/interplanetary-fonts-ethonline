@@ -1,0 +1,7 @@
+.container {
+  background-color: var(--light);
+  min-height: 50vh;
+  width: 100vw;
+  padding: 2rem;
+  display: flex;
+}
