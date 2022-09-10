@@ -8,6 +8,14 @@
   gap: 0.5rem;
 }
 
+.header.darkblue {
+  background-color: var(--darkblue);
+}
+
+.header.red {
+  background-color: var(--red);
+}
+
 .header p {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }

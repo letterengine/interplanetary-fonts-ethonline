@@ -13,11 +13,7 @@ export default function Profile() {
   };
   return (
     <ProfileContainer>
-      <UserCard
-        subprofile={subprofile}
-        title={`${titleCase(subprofile)} Profile`}
-        handleSubprofile={handleSubprofile}
-      />
+      <UserCard subprofile={subprofile} handleSubprofile={handleSubprofile} />
     </ProfileContainer>
   );
 }
