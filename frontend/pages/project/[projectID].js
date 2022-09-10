@@ -1,3 +1,9 @@
+import Card from "../../components/projectPreview";
 export default function Project() {
-  return <p>Project</p>;
+  return (
+    <div>
+      <p>Project</p>
+      <Card />
+    </div>
+  );
 }
