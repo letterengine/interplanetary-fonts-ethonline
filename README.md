@@ -39,3 +39,12 @@ The project is built on Polygon and uses Worldcoin + Lens to create a user frien
     $ pnpm dev:frontend
 ```
  4. View on browser: http://localhost:3000
+
+### Installing New NPM Dependencies
+1. cd to root directory of this repo
+
+2. Run pnpm add but with filter parameter defined
+```bash
+    $ pnpm --filter <workspace name here> add graphql
+```
+
