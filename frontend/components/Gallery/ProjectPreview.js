@@ -1,9 +1,10 @@
 export default function ProjectPreview(props) {
   return (
-    <div className='max-w-sm min-w-fit container flex flex-col border-2 border-solid border-red rounded'>
-      <div className='container flex flex-row items-center p-4 h-8 bg-red'>
+    <div className='max-w-sm min-w-fit container flex  flex-col border-2 border-solid border-red rounded'>
+      <div className='container flex flex-row items-center p-4 h-8 bg-red '>
+        {' '}
         <svg
-          className='h-5 fill-yellow '
+          className='h-5   fill-yellow '
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 576 512'
         >
@@ -11,7 +12,7 @@ export default function ProjectPreview(props) {
         </svg>
       </div>
       <div className='h-80 border-2 border-solid border-red bg-darkblue'></div>
-      <div className='container flex flex-row items-center bg-white p-4 border-2 border-solid border-red'>
+      <div className=' container flex flex-row items-center bg-white p-4  border-2 border-solid border-red'>
         <div className='border-r-2 h-14 w-16 rounded-full mr mr-4 bg-slate-600'></div>
         <div className='container flex flex-col '>
           <p className='text-darkblue text-2xl text-left font-black'>

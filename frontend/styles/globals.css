@@ -21,7 +21,13 @@ html,
 body {
   text-align: center;
   font-family: sans-serif;
-  background-color: var(--darkblue);
+  background-color: var(--light);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1,

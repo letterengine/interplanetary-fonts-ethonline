@@ -1,9 +1,9 @@
-import Card from "../../components/projectPreview";
+import ProjectPreview from '../../components/Gallery/ProjectPreview';
 export default function Project() {
   return (
     <div>
       <p>Project</p>
-      <Card />
+      <ProjectPreview />
     </div>
   );
 }

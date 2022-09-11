@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-
+// Components
 import Gallery from '../components/Gallery/Gallery';
 
 export default function Home() {
   return (
-    <div className={styles.app}>
+    <div>
       <Head>
         <title>InterplanetaryFonts</title>
         <meta
@@ -18,16 +18,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <header className={styles.header}>
-        <div className={styles.logoWrap}>
-          <Image
-            src='/logo.svg'
-            className={styles.logo}
-            alt='logo'
-            layout='responsive'
-            width={400}
-            height={400}
-          />
-        </div>
+        <h1>Interplanetary Fonts</h1>
       </header>
       <Gallery />
     </div>

@@ -1,5 +1,5 @@
-import ProjectPreview from './ProjectPreview';
 import { useState } from 'react';
+import ProjectPreview from './ProjectPreview';
 
 const dummyProjects = [
   { nme: 'Hola Sans', author: { nme: 'user.lens', avatar: 'img/url' } },
@@ -13,7 +13,7 @@ const dummyProjects = [
 export default function Gallery() {
   const [projects] = useState(dummyProjects);
   return (
-    <div className='container max-w-screen-xl flex flex-col flex-wrap md:flex-row gap-5 items-star'>
+    <div className='container max-w-screen-xl flex flex-col flex-wrap md:flex-row gap-5 items-star pl-6 pr-6 pb-12'>
       {projects.map((project, i) => {
         return (
           <ProjectPreview
