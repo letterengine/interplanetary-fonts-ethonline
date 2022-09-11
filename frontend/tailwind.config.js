@@ -14,6 +14,9 @@ module.exports = {
         darkblue: "#020866",
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [],
 };

@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+import List from "../components/listProjectPreview";
+
 export default function Home() {
   return (
     <div className={styles.app}>
@@ -17,9 +19,6 @@ export default function Home() {
       </Head>
       <header className={styles.header}>
         <div className={styles.logoWrap}>
-          <h1 className="text-1xl font-bold center underline">
-            Interplanetary Fonts
-          </h1>
           <Image
             src="/logo.svg"
             className={styles.logo}
@@ -30,6 +29,7 @@ export default function Home() {
           />
         </div>
       </header>
+      <List></List>
     </div>
   );
 }
