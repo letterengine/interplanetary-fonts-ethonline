@@ -1,8 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
 
-import List from "../components/listProjectPreview";
+import Gallery from '../components/Gallery/Gallery';
 
 export default function Home() {
   return (
@@ -10,26 +10,26 @@ export default function Home() {
       <Head>
         <title>InterplanetaryFonts</title>
         <meta
-          name="description"
-          content="Web App created during ETHOnline 2022"
+          name='description'
+          content='Web App created during ETHOnline 2022'
         />
-        <link rel="apple-touch-icon" href="/logo192.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='apple-touch-icon' href='/logo192.png' />
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
       <header className={styles.header}>
         <div className={styles.logoWrap}>
           <Image
-            src="/logo.svg"
+            src='/logo.svg'
             className={styles.logo}
-            alt="logo"
-            layout="responsive"
+            alt='logo'
+            layout='responsive'
             width={400}
             height={400}
           />
         </div>
       </header>
-      <List></List>
+      <Gallery />
     </div>
   );
 }

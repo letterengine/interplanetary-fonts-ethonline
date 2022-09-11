@@ -4,6 +4,7 @@
   border: 2px solid var(--darkblue);
   border-radius: var(--global-radius);
   min-height: 50vh;
+  min-width: 15rem;
   width: 20vw;
   display: flex;
   flex-direction: column;

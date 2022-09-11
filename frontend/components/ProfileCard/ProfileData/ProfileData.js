@@ -3,15 +3,13 @@ import classes from './ProfileData.module.css';
 export default function ProfileData(props) {
   return (
     <div className={classes.container}>
-      <p className={classes.username}>
-        <strong>
-          <em>{`@${props.user.username}`}</em>
-        </strong>
-      </p>
       <div
         style={{ backgroundImage: `url("${props.user.avatar}")` }}
         className={classes.avatar}
       ></div>
+      <h6 className={classes.username}>
+        <em>{`@${props.user.username}`}</em>
+      </h6>
       <div className={classes.follow}>
         <p className={classes['follow-el']}>
           <strong>Followers:</strong>

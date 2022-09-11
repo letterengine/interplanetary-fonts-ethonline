@@ -12,23 +12,18 @@
 }
 
 .avatar {
-  width: 7rem;
-  height: 7rem;
+  width: 8rem;
+  height: 8rem;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
-  border: 10px solid var(--red);
+  border: 5px solid var(--red);
+  transition: all 0.5s ease;
 }
 
-.avatar::before {
-  content: '';
-  position: absolute;
-  border-radius: 100%;
-  width: calc(7rem - 20px);
-  height: calc(7rem - 20px);
-  transform: translate(calc(-3.5rem + 5px), calc(-5px));
-  border: 5px solid var(--yellow);
+.avatar:hover {
+  border-color: var(--yellow);
 }
 
 .follow {
@@ -55,7 +50,7 @@
 
 .social {
   display: flex;
-  gap: 0.15rem;
+  gap: 0.25rem;
 }
 
 .handle {
