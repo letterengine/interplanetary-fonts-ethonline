@@ -143,3 +143,6 @@ dist
 # typescript
 next-env.d.ts
 
+#hardhat
+artifacts
+cache
