@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // Dummy Data
 const fakeUser = {
@@ -25,9 +26,10 @@ const fakeUser = {
 
 export default function NavBar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-
+  const router = useRouter();
   const handleConnect = e => {
     props.connect(fakeUser);
+    router.push(`/user/${fakeUser.address}`);
   };
 
   return (
@@ -77,7 +79,7 @@ export default function NavBar(props) {
               placeholder='Search Fonts in the Universe'
             ></input>
           </div>
-          <Link href='/profile'>
+          <Link href={`/user/${fakeUser.address}`}>
             <button
               onClick={handleConnect}
               className='w-56 border-2 px-4 py-2  bg-red border-red rounded border-solid hover:border-solid text-white text-md hover:text-darkblue hover:border-darkblue focus:outline-none '
