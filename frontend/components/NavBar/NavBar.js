@@ -26,12 +26,12 @@ const fakeUser = {
 export default function NavBar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
-  const handleConnect = () => {
+  const handleConnect = e => {
     props.connect(fakeUser);
   };
 
   return (
-    <nav className='flex flex-wrap items-center justify-between px-2 py-3 bg-white mb-10'>
+    <nav className='flex flex-wrap items-center justify-between px-2 py-3 mb-10'>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-center lg:justify-between'>
         <div className='w-full relative flex justify-between  sm:justify-between lg:w-auto lg:static lg:block lg:justify-start'>
           <a href='/'>
@@ -82,7 +82,7 @@ export default function NavBar(props) {
               onClick={handleConnect}
               className='w-56 border-2 px-4 py-2  bg-red border-red rounded border-solid hover:border-solid text-white text-md hover:text-darkblue hover:border-darkblue focus:outline-none '
             >
-              Connect
+              {props.connectButton}
             </button>
           </Link>
         </div>
