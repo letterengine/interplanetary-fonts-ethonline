@@ -1,10 +1,10 @@
 export default function ProjectPreview(props) {
   return (
     <div className="max-w-sm min-w-fit container flex  flex-col border-2 border-solid border-red rounded">
-      <div className="container flex flex-row items-center p-4 h-8 bg-red ">
+      <div className="container flex flex-row items-center p-4 h-8 bg-red cursor-pointer">
         {" "}
         <svg
-          className="h-5   fill-yellow "
+          className="h-5   fill-yellow  hover:fill-darkblue"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 576 512"
         >
@@ -12,19 +12,19 @@ export default function ProjectPreview(props) {
         </svg>
       </div>
       <div
-        className="h-80 border-2 border-solid border-red bg-white bg-contain bg-center"
+        className="h-80 border-2 border-solid border-red bg-white bg-contain bg-center cursor-pointer"
         style={{ backgroundImage: `url("${props.projectImage}")` }}
       ></div>
       <div className=" container flex flex-row items-center bg-white p-4  border-2 border-solid border-red">
         <div
-          className="border-r-2 h-14 w-16 rounded-full mr mr-4 bg-slate-600 bg-contain bg-center "
+          className="border-r-2 border-2 border-solid border-transparent h-14 w-16 rounded-full mr mr-4 bg-slate-600 bg-contain bg-center hover:border-2 hover:border-solid hover:border-yellow  cursor-pointer box-content"
           style={{ backgroundImage: `url("${props.avatar}")` }}
         ></div>
         <div className="container flex flex-col ">
-          <p className="text-darkblue text-2xl text-left font-black">
+          <p className="text-darkblue text-2xl text-left font-black cursor-pointer hover:text-red">
             {props.projectName}
           </p>
-          <p className="text-red text-left text-sm font-light">
+          <p className="text-red text-left text-sm font-light cursor-pointer hover:text-darkblue">
             {props.author}
           </p>
         </div>
