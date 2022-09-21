@@ -21,6 +21,7 @@
     "hardhat": "^2.11.2"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.7.3"
+    "@openzeppelin/contracts": "^4.7.3",
+    "@superfluid-finance/ethereum-contracts": "^1.4.0"
   }
 }
