@@ -5,22 +5,40 @@ import logo from '../../public/logoHeader.svg';
 import classes from '../../styles/NavBar.module.css';
 // Components
 import ConnectButton from './ConnectButton';
+import ConnectedMenu from './ConnectedMenu';
 
 export default function NavBar(props) {
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false),
+    [menu, setMenu] = useState(false);
+
+  // Event handlers
+  const handleConnectedMenu = () => {
+    if (props.connected) {
+      setMenu(pastMenu => !pastMenu);
+    } else {
+      props.connect();
+    }
+  };
+
+  const handleDisconnect = () => {
+    props.disconnect();
+    setMenu(false);
+  };
 
   return (
-    <nav className='flex flex-wrap items-center justify-between px-2 py-3 mb-10'>
+    <nav className={classes.nav}>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-center lg:justify-between'>
         <div className='w-full relative flex justify-between  sm:justify-between lg:w-auto lg:static lg:block lg:justify-start'>
           <Link href='/'>
-            <Image
-              src={logo}
-              alt='InterplanetaryFonts'
-              width={78.91}
-              height={100}
-              className={classes.logo}
-            />
+            <a>
+              <Image
+                src={logo}
+                alt='InterplanetaryFonts'
+                width={78.91}
+                height={100}
+                className={classes.logo}
+              />
+            </a>
           </Link>
           <p>InterplanetaryFonts</p>
           <button
@@ -61,8 +79,15 @@ export default function NavBar(props) {
             user={props.user}
             connected={props.connected}
             buttonText={props.buttonText}
-            onClick={props.connected ? props.disconnect : props.connect}
+            onClick={handleConnectedMenu}
           />
+          {props.connected && (
+            <ConnectedMenu
+              menu={menu}
+              user={props.user}
+              handleDisconnect={handleDisconnect}
+            />
+          )}
         </div>
       </div>
     </nav>

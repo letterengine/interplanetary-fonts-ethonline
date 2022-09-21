@@ -1,3 +1,14 @@
+.nav {
+  justify-self: center;
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  margin-bottom: 10px;
+}
+
 .logo {
   cursor: pointer;
   transition: all 0.5s ease;
