@@ -1,50 +1,28 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-// Dummy Data
-const fakeUser = {
-  username: 'gutentype',
-  address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-  avatar: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg',
-  following: 0,
-  followers: 1439,
-  website: 'https://type-papa.xyz',
-  about:
-    'Johannes Gensfleisch zur Laden zum Gutenberg was a German inventor, printer, publisher, and goldsmith who introduced printing to Europe with his mechanical movable-type printing press.',
-  social: [
-    { icon: 'RD', url: 'https://app.radicle.xyz/gutentype' },
-    { icon: 'GH', url: 'https://github.com/gutentype' },
-    { icon: 'TW', url: 'https://twitter.com/gutentype' },
-    { icon: 'TG', url: 'https://t.me/gutentype' },
-    { icon: 'DC', url: 'https://discordapp.com/users/gutentype#5922' },
-    { icon: 'IG', url: 'https://www.instagram.com/gutentype' },
-  ],
-};
+import classes from '../../styles/NavBar.module.css';
+// Components
+import ConnectButton from './ConnectButton';
 
 export default function NavBar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const router = useRouter();
-  const handleConnect = e => {
-    props.connect(fakeUser);
-    router.push(`/user/${fakeUser.address}`);
-  };
 
   return (
     <nav className='flex flex-wrap items-center justify-between px-2 py-3 mb-10'>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-center lg:justify-between'>
         <div className='w-full relative flex justify-between  sm:justify-between lg:w-auto lg:static lg:block lg:justify-start'>
-          <a href='/'>
+          <Link href='/'>
             <Image
               src={logo}
-              alt='Interplanetary Fonts'
+              alt='InterplanetaryFonts'
               width={78.91}
               height={100}
+              className={classes.logo}
             />
-          </a>
-          <p>Interplanetary Fonts</p>
+          </Link>
+          <p>InterplanetaryFonts</p>
           <button
             className='text-darkblue cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none'
             type='button'
@@ -79,14 +57,12 @@ export default function NavBar(props) {
               placeholder='Search Fonts in the Universe'
             ></input>
           </div>
-          <Link href={`/user/${fakeUser.address}`}>
-            <button
-              onClick={handleConnect}
-              className='w-56 border-2 px-4 py-2  bg-red border-red rounded border-solid hover:border-solid text-white text-md hover:text-darkblue hover:border-darkblue focus:outline-none '
-            >
-              {props.connectButton}
-            </button>
-          </Link>
+          <ConnectButton
+            user={props.user}
+            connected={props.connected}
+            buttonText={props.buttonText}
+            onClick={props.connected ? props.disconnect : props.connect}
+          />
         </div>
       </div>
     </nav>

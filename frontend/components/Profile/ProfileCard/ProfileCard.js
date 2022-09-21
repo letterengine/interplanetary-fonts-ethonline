@@ -6,7 +6,7 @@ import ProfileData from './ProfileData';
 export default function ProfileCard(props) {
   return (
     <div className={classes.container}>
-      <ProfileHeader />
+      <ProfileHeader connected={props.connected} />
       <ProfileData user={props.user} />
     </div>
   );

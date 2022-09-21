@@ -12,6 +12,7 @@ export default function Profile(props) {
       <ProfileCard
         user={props.user}
         subprofile={subprofile}
+        connected={props.connected}
         handleSubprofile={handleSubprofile}
       />
     </DashboardContainer>

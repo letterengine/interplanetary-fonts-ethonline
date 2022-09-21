@@ -19,7 +19,7 @@ export default function CardHeaderButton(props) {
     <button
       className={`${classes.button} ${
         !hover ? classes[props.color.normal] : classes[props.color.hover]
-      } ${props.active && classes[props.color.active]}`}
+      } ${props.active && classes[props.color.active]} ${props.className}`}
       onMouseOver={handleHover}
       onMouseOut={handleOut}
       onClick={handleClick}

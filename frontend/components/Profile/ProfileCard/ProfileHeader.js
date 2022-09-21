@@ -34,18 +34,29 @@ export default function ProfileHeader(props) {
       color={cardColor}
     >
       <div className={classes.buttons}>
-        {btns.map((btn, i) => {
-          return (
-            <CardHeaderButton
-              key={`btn-${i}`}
-              active={btn.active}
-              color={cardColor}
-              handleActiveButtons={handleActiveButtons}
-            >
-              {btn.nme}
-            </CardHeaderButton>
-          );
-        })}
+        {props.connected ? (
+          btns.map((btn, i) => {
+            return (
+              <CardHeaderButton
+                key={`btn-${i}`}
+                active={btn.active}
+                color={cardColor}
+                handleActiveButtons={handleActiveButtons}
+              >
+                {btn.nme}
+              </CardHeaderButton>
+            );
+          })
+        ) : (
+          <CardHeaderButton
+            className={classes.onecol}
+            active={false}
+            color={cardColor}
+            handleActiveButtons={handleActiveButtons}
+          >
+            Follow
+          </CardHeaderButton>
+        )}
       </div>
     </CardHeader>
   );
