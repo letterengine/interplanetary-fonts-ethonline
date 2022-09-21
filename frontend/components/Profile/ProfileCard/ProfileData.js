@@ -1,4 +1,4 @@
-import classes from './ProfileData.module.css';
+import classes from '../../../styles/ProfileData.module.css';
 
 export default function ProfileData(props) {
   return (

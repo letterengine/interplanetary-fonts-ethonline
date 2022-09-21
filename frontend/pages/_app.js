@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import '../styles/reset.css';
 import '../styles/globals.css';
-import NavBar from '../components/NavBar/NavBar';
-import Main from '../components/Main/Main';
+// Components
+import NavBar from '../components/UI/NavBar';
+import Main from '../components/UI/Main';
 
 export default function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(undefined),

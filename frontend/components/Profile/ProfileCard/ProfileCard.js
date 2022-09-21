@@ -1,7 +1,7 @@
-import classes from './ProfileCard.module.css';
+import classes from '../../../styles/ProfileCard.module.css';
 // Components
-import ProfileHeader from './ProfileHeader/ProfileHeader';
-import ProfileData from './ProfileData/ProfileData';
+import ProfileHeader from './ProfileHeader';
+import ProfileData from './ProfileData';
 
 export default function ProfileCard(props) {
   return (

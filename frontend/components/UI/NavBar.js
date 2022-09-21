@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ const fakeUser = {
 };
 
 export default function NavBar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
   const handleConnect = e => {
     props.connect(fakeUser);

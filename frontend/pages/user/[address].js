@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ProfileCard from '../../components/ProfileCard/ProfileCard';
-import DashboardContainer from '../../components/UI/DashboardContainer/DashboardContainer';
+import ProfileCard from '../../components/Profile/ProfileCard/ProfileCard';
+import DashboardContainer from '../../components/UI/DashboardContainer';
 
 export default function Profile(props) {
   const [subprofile, setSubprofile] = useState('creator');

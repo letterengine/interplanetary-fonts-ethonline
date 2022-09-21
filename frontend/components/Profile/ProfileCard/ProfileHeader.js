@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import classes from './ProfileHeader.module.css';
+import classes from '../../../styles/ProfileHeader.module.css';
 // Components
-import CardHeader from '../../UI/CardHeader/CardHeader';
-import CardHeaderButton from '../../UI/CardHeaderButton/CardHeaderButton';
+import CardHeader from '../../UI/CardHeader';
+import CardHeaderButton from '../../UI/CardHeaderButton';
 
 export default function ProfileHeader(props) {
   // State

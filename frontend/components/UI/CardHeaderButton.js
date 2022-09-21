@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import classes from './CardHeaderButton.module.css';
+import classes from '../../styles/CardHeaderButton.module.css';
 
 export default function CardHeaderButton(props) {
   // States

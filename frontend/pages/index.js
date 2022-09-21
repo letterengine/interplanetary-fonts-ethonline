@@ -1,7 +1,7 @@
 import Head from 'next/head';
 // Components
 import Gallery from '../components/Gallery/Gallery';
-import Main from '../components/Main/Main';
+import Main from '../components/UI/Main';
 
 export default function Home() {
   return (
