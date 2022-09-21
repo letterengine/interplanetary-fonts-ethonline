@@ -25,9 +25,11 @@ export default function ProjectPreview(props) {
           style={{ backgroundImage: `url("${props.avatar}")` }}
         ></div>
         <div className='container flex flex-col '>
-          <p className='text-darkblue text-2xl text-left font-black cursor-pointer hover:text-red'>
-            {props.projectName}
-          </p>
+          <Link href={props.url}>
+            <p className='text-darkblue text-2xl text-left font-black cursor-pointer hover:text-red'>
+              {props.projectName}
+            </p>
+          </Link>
           <p className='text-red text-left text-sm font-light cursor-pointer hover:text-darkblue'>
             {props.author}
           </p>

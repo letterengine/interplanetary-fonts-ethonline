@@ -1,10 +1,12 @@
+import { useState } from 'react';
 // Components
-import Main from '../../components/UI/Main';
+import FontCard from '../../components/Font/FontCard/FontCard';
+import DashboardContainer from '../../components/UI/DashboardContainer';
 
-export default function Font() {
+export default function Font(props) {
   return (
-    <Main>
-      <h2>Project</h2>
-    </Main>
+    <DashboardContainer>
+      <FontCard font={props.font} />
+    </DashboardContainer>
   );
 }
