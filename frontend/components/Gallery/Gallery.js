@@ -1,65 +1,71 @@
-import { useState } from "react";
-import ProjectPreview from "./ProjectPreview";
+import { useState } from 'react';
+import ProjectPreview from './ProjectPreview';
 
 const dummyProjects = [
   {
-    nme: "Hola Sans",
+    nme: 'Hola Sans',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "Gutemberg.lens",
+      nme: 'gutenberg.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg',
     },
   },
   {
-    nme: "Adios Sans",
+    nme: 'Adios Sans',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "mmm.lens",
+      nme: 'sheila.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://www.calligraphersguild.org/images/SHEILA-WATERS-Zoe--by-Yukimi-Annand-2016.jpg',
     },
   },
   {
-    nme: "Hola Text",
+    nme: 'Adios Text',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "ttt.lens",
+      nme: 'bodoni.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://upload.wikimedia.org/wikipedia/commons/5/55/Giambattista_Bodoni_by_Giuseppe_Lucatelli.jpg',
     },
   },
   {
-    nme: "Adios Text",
+    nme: 'Hola Text',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "rrr.lens",
+      nme: 'twombly.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://www.fontshop.com/cdn-cgi/image/format=auto/https://fontshop-prod-responsive-images.s3.amazonaws.com/uploads/profile_image/attachment/386499/large_Carol-Twombly_crop@2x.jpg',
     },
   },
   {
-    nme: "Hola Text",
+    nme: 'Hola Text',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "aaa.lens",
+      nme: 'carter.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://upload.wikimedia.org/wikipedia/commons/0/05/20180914-ATypI-2018-Matthew_Carter-NP.jpg',
     },
   },
   {
-    nme: "Adios Text",
+    nme: 'Adios Text',
+    url: 'font/test-font',
     projectImage:
-      "https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg",
+      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
     author: {
-      nme: "user.lens",
+      nme: 'gudrun.lens',
       avatar:
-        "https://upload.wikimedia.org/wikipedia/commons/3/33/Gutenberg.jpg",
+        'https://upload.wikimedia.org/wikipedia/commons/c/c7/20160320T160542-GZvH-NP.jpg',
     },
   },
 ];
@@ -67,7 +73,7 @@ const dummyProjects = [
 export default function Gallery() {
   const [projects] = useState(dummyProjects);
   return (
-    <div className="container max-w-screen-xl flex flex-col flex-wrap md:flex-row gap-5 items-star pl-6 pr-6 pb-12">
+    <div className='container max-w-screen-xl flex flex-col flex-wrap md:flex-row gap-5 items-star pl-6 pr-6 pb-12'>
       {projects.map((project, i) => {
         return (
           <ProjectPreview
@@ -76,6 +82,7 @@ export default function Gallery() {
             author={project.author.nme}
             avatar={project.author.avatar}
             projectImage={project.projectImage}
+            url={project.url}
           />
         );
       })}
