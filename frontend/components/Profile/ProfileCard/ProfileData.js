@@ -1,4 +1,4 @@
-import classes from '../../../styles/ProfileData.module.css';
+import classes from '../../../styles/CardData.module.css';
 
 export default function ProfileData(props) {
   const fakeUser = {

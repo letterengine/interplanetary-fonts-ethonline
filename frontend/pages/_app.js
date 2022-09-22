@@ -32,7 +32,7 @@ const fakeUser = {
         address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
       },
     ],
-    description: 'Badass Sans Serif Latin Font',
+    description: 'Badass Sans Serif Latin Font with English support',
     streams: ['Add ligatures', 'Add French Support'],
     collected: [
       {
