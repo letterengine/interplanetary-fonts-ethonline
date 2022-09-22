@@ -17,7 +17,7 @@ export default function ProjectPreview(props) {
       </div>
       <Link href={props.url}>
         <div
-          className='h-80 border-2 border-solid border-red bg-white bg-contain bg-center cursor-pointer'
+          className='h-80 border-2 border-solid border-red bg-white bg-cover bg-center cursor-pointer'
           style={{ backgroundImage: `url("${props.projectImage}")` }}
         ></div>
       </Link>

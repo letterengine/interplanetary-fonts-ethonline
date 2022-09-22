@@ -3,10 +3,10 @@ import ProjectPreview from './ProjectPreview';
 
 const dummyProjects = [
   {
-    nme: 'Hola Sans',
+    nme: 'Blackletther',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/2/27/Gutenberg_bible_Old_Testament_Epistle_of_St_Jerome.jpg',
     author: {
       nme: 'gutenberg.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -15,10 +15,10 @@ const dummyProjects = [
     },
   },
   {
-    nme: 'Adios Sans',
+    nme: 'Foundethional',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://www.calligraphersguild.org/exhibits/2009-SheilaWaters/sw-roundel-large.jpg',
     author: {
       nme: 'sheila.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -27,10 +27,10 @@ const dummyProjects = [
     },
   },
   {
-    nme: 'Adios Text',
+    nme: 'Bitdoni',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://museobodoniano.com/appwp/wp-content/uploads//2018/05/museo-bodoniano-giambattista-bodoni-opera-punzoni-copertina.jpg',
     author: {
       nme: 'bodoni.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -39,10 +39,10 @@ const dummyProjects = [
     },
   },
   {
-    nme: 'Hola Text',
+    nme: 'Ethrajan',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/e/e4/Trajan_typeface_specimen.svg',
     author: {
       nme: 'twombly.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -51,10 +51,10 @@ const dummyProjects = [
     },
   },
   {
-    nme: 'Hola Text',
+    nme: 'Bitdana',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/0/01/VerdanaSpecimen.svg',
     author: {
       nme: 'carter.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -63,10 +63,10 @@ const dummyProjects = [
     },
   },
   {
-    nme: 'Adios Text',
+    nme: 'Alcubit',
     url: 'font/test-font',
     projectImage:
-      'https://fonts.gstatic.com/s/img/knowledge/modules/choosing_type/lessons/a_checklist_for_choosing_type/images/a_checklist_for_choosing_type_1_439626857.svg',
+      'https://www.linotype.com/cdn-cgi/image/format=auto/https://image.linotype.com/cms/alcuin_01a_d31413i32.gif',
     author: {
       nme: 'gudrun.lens',
       url: '/user/0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
