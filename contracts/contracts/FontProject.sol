@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 import "./InterPlanetaryFontNFT.sol";
 
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ISuperfluid, ISuperToken, SuperAppBase, SuperAppDefinitions} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol";
 import {IInstantDistributionAgreementV1} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IInstantDistributionAgreementV1.sol";
 
@@ -10,6 +11,13 @@ import {IDAv1Library} from "@superfluid-finance/ethereum-contracts/contracts/app
 
 contract FontProject {
   InterPlanetaryFontNFT private fontNFT = new InterPlanetaryFontNFT();
+
+  uint8 constant TOTAL_DISTRIBUTION_UNITS = 100;
+  uint8 constant OWNER_DISTRIBUTION_UNITS = 60;
+  uint8 constant COLLABORATOR_DISTRIBUTION_UNITS = TOTAL_DISTRIBUTION_UNITS - OWNER_DISTRIBUTION_UNITS;
+  
+  address constant MATIC_MUMBAI_CONTRACT = 0x0000000000000000000000000000000000001010;
+  address constant MATICX_MUMBAI_CONTRACT = 0x96B82B65ACF7072eFEb00502F45757F254c2a0D4;
 
   /// @notice IDA Library
   using IDAv1Library for IDAv1Library.InitData;
@@ -107,7 +115,7 @@ contract FontProject {
       font.idaDistributionToken,
       font.royaltyIDAIndex,
       msg.sender,
-      60
+      OWNER_DISTRIBUTION_UNITS
     );
 
     emit NewFontProjectCreated(
@@ -120,6 +128,18 @@ contract FontProject {
     );
   }
 
+  function addCollaborator(bytes32 fontId, address collaborator) external {
+    CreateFontProject storage font = idToFontProject[fontId];
+
+    require(font.startDateTime != 0, "FONT NOT FOUND");
+    require(font.creatorAddress == msg.sender, "ONLY FONT CREATOR CAN UPDATE COLLABORATORS");
+    require(indexOf(font.collaborators, collaborator) >= 0, "ALREADY A COLLABORATOR");
+
+    font.collaborators.push(msg.sender);
+
+    setFontCollaboratorProfitDistribution(font.id, COLLABORATOR_DISTRIBUTION_UNITS);
+  }
+
 
   function mintFontProject(
     bytes32 fontId,
@@ -130,11 +150,17 @@ contract FontProject {
     require(font.startDateTime != 0, "FONT NOT FOUND");
     require(msg.value == font.mintPrice, "NOT ENOUGH ETH SENT");
 
+    // approving
+    IERC20(MATIC_MUMBAI_CONTRACT).approve(MATICX_MUMBAI_CONTRACT, msg.value);
+
+    // wrapping
+    ISuperToken(MATICX_MUMBAI_CONTRACT).upgrade(msg.value);
+
 
     uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
     font.mints.push(tokenId);
 
-    // TODO - distribute earnings to collaborators
+    distributeFontProfit(fontId);
 
     emit FontProjectMinted(
       fontId,
@@ -142,7 +168,7 @@ contract FontProject {
     );
   }
 
-  function indexOf(uint256[] memory arr, uint256 searchFor) private pure returns (uint256) {
+  function indexOf(address[] memory arr, address searchFor) private pure returns (uint256) {
     for (uint256 i = 0; i < arr.length; i++) {
       if (arr[i] == searchFor) {
         return i;
@@ -151,18 +177,20 @@ contract FontProject {
     revert("NOT FOUND");
   }
 
-  function setFontCollaboratorProfitDistribution(bytes32 fontId, uint128 distributionUnits) public {
+  function setFontCollaboratorProfitDistribution(bytes32 fontId, uint128 distributionUnits) private {
     CreateFontProject memory font = idToFontProject[fontId];
 
     require(font.startDateTime != 0, "FONT NOT FOUND");
     require(font.creatorAddress == msg.sender, "ONLY FONT CREATOR CAN UPDATE COLLABORATOR PROFIT DISTRIBUTION");
+
+    uint128 perCollaboratorDistributionUnits = uint128(distributionUnits / font.collaborators.length);
 
     for (uint256 i = 0; i < font.collaborators.length; i++) {
       _idaV1.updateSubscriptionUnits(
         font.idaDistributionToken,
         font.royaltyIDAIndex,
         font.collaborators[i],
-        distributionUnits
+        perCollaboratorDistributionUnits
       );
     }
   }
