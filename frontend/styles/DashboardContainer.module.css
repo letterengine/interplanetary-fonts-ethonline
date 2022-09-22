@@ -4,6 +4,7 @@
   max-width: 1080px;
   padding: 2rem;
   display: flex;
+  gap: 1rem;
 }
 
 @media screen and (max-width: 800px) {

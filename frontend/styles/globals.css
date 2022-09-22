@@ -22,6 +22,7 @@ body {
   text-align: center;
   font-family: sans-serif;
   background-color: var(--light);
+  color: var(--darkblue);
 }
 
 body {

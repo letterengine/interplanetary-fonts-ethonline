@@ -1,6 +1,5 @@
 .container {
   background-color: var(--light);
-  color: var(--darkblue);
   border: 2px solid var(--darkblue);
   border-radius: var(--global-radius);
   min-height: 50vh;

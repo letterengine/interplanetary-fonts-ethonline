@@ -25,7 +25,9 @@ const fakeUser = {
     ],
   },
   fakeFont = {
-    nme: 'Test Font',
+    nme: 'Sans Serif',
+    cssname: 'Helvetica',
+    weight: 700,
     creators: [
       {
         username: 'gutentype',
@@ -40,6 +42,12 @@ const fakeUser = {
         address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
       },
     ],
+    specimen:
+      'https://oa.letterformarchive.org/api/image/lfa_venezky_0103/lfa_venezky_0103_001',
+    preselect: ['Uppercase', 'Lowercase', 'Complete'],
+    charset:
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·$%()-.,',
+    price: 30,
   };
 
 export default function MyApp({ Component, pageProps }) {
