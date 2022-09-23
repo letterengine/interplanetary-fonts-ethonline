@@ -40,7 +40,7 @@ Users can connect with their wallet to the application, fund projects or mint NF
 ```
 3. Run the app 
 ```bash
-    $ pnpm dev:frontend
+    $ pnpm run dev:frontend
 ```
  4. View on browser: http://localhost:3000
 
