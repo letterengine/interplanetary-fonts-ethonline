@@ -5,6 +5,7 @@ export default function FontTester(props) {
   const [testerValue, setTesterValue] = useState('Font Tester');
 
   // Event handlers
+
   const handleType = e => {
     setTesterValue(e.target.value);
   };

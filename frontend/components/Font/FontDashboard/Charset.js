@@ -5,15 +5,17 @@ import Letter from './Letter';
 export default function Charset(props) {
   return (
     <div className={classes['charset-grid']}>
-      {[...props.charset].map((letter, i) => (
+      {Object.values(props.chars).map((letter, i) => (
         <Letter
           key={`char-${i}`}
           cssname={props.cssname}
           weight={props.weight}
-          unit={props.unit}
           handlePrice={props.handlePrice}
+          checkedClass={letter.clss}
+          handleLetterClick={props.handleLetterClick}
+          i={i}
         >
-          {letter}
+          {letter.char}
         </Letter>
       ))}
     </div>
