@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.17;
 
 import "./InterPlanetaryFontNFT.sol";
 
@@ -15,7 +15,7 @@ contract FontProject {
   uint8 constant TOTAL_DISTRIBUTION_UNITS = 100;
   uint8 constant OWNER_DISTRIBUTION_UNITS = 60;
   uint8 constant COLLABORATOR_DISTRIBUTION_UNITS = TOTAL_DISTRIBUTION_UNITS - OWNER_DISTRIBUTION_UNITS;
-  
+
   address constant MATIC_MUMBAI_CONTRACT = 0x0000000000000000000000000000000000001010;
   address constant MATICX_MUMBAI_CONTRACT = 0x96B82B65ACF7072eFEb00502F45757F254c2a0D4;
 
@@ -25,21 +25,14 @@ contract FontProject {
   
   mapping(bytes32 => CreateFontProject) public idToFontProject;
 
-  uint32 private currentIDAIndex;
+  uint32 private currentIDAIndex = 0;
 
-  constructor(ISuperfluid _host) {
+  constructor(ISuperfluid _host, IInstantDistributionAgreementV1 _ida) {
+
     // IDA Library Initialize.
     _idaV1 = IDAv1Library.InitData(
         _host,
-        IInstantDistributionAgreementV1(
-            address(
-                _host.getAgreementClass(
-                    keccak256(
-                        "org.superfluid-finance.agreements.InstantDistributionAgreement.v1"
-                    )
-                )
-            )
-        )
+        _ida
     );
   }
 
@@ -77,7 +70,6 @@ contract FontProject {
     uint256 createdAt,
     uint256 startDateTime,
     uint256 mintPrice,
-    ISuperToken idaDistributionToken,
     string calldata metaDataCID
   ) external {
     bytes32 fontId = keccak256(
@@ -97,6 +89,8 @@ contract FontProject {
 
     currentIDAIndex = currentIDAIndex + 1;
 
+    ISuperToken idaDistributionToken = ISuperToken(MATICX_MUMBAI_CONTRACT);
+
     CreateFontProject memory font = CreateFontProject(
         fontId,
         metaDataCID,
@@ -110,6 +104,11 @@ contract FontProject {
         startDateTime
     );
     idToFontProject[fontId] = font;
+
+    _idaV1.createIndex(
+      font.idaDistributionToken,
+      font.royaltyIDAIndex
+    );
 
     _idaV1.updateSubscriptionUnits(
       font.idaDistributionToken,
