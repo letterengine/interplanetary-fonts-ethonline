@@ -4,10 +4,18 @@ import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
 import classes from '../../styles/NavBar.module.css';
 // Components
-import ConnectButton from './ConnectButton';
+// import ConnectButton from './ConnectButton';
 import ConnectedMenu from './ConnectedMenu';
 
-export default function NavBar(props) {
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useDisconnect } from "wagmi";
+
+// export default function NavBar(props) {
+export default function NavBar() {
+
+    const { data: account } = useAccount();
+    const { disconnect } = useDisconnect();
+  
   const [navbarOpen, setNavbarOpen] = useState(false),
     [menu, setMenu] = useState(false);
 
@@ -75,19 +83,26 @@ export default function NavBar(props) {
               placeholder='Search Fonts in the Universe'
             ></input>
           </div>
-          <ConnectButton
+                  {/* <ConnectButton 
             user={props.user}
             connected={props.connected}
             buttonText={props.buttonText}
             onClick={handleConnectedMenu}
           />
-          {props.connected && (
+          { props.connected && (
             <ConnectedMenu
               menu={menu}
               user={props.user}
               handleDisconnect={handleDisconnect}
-            />
-          )}
+            /> */}
+          <div>
+          {account ? (
+        <ConnectedMenu account={account} disconnect={() => disconnect()} />
+    ) : (
+        <ConnectButton />
+    )}
+
+</div>
         </div>
       </div>
     </nav>

@@ -1,6 +1,31 @@
 import { useState } from 'react';
 import '../styles/reset.css';
 import '../styles/globals.css';
+
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { infuraProvider } from "wagmi/providers/infura";
+import { publicProvider } from "wagmi/providers/public";
+
+const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
+
+const { chains, provider } = configureChains(
+  [chain.polygon],
+  [infuraProvider({ infuraId }), publicProvider()]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: "frontend",
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
+
 // Components
 import NavBar from '../components/UI/NavBar';
 import Main from '../components/UI/Main';
@@ -74,15 +99,13 @@ export default function MyApp({ Component, pageProps }) {
     };
 
   return (
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
     <Main>
-      <NavBar
-        user={user}
-        connected={connected}
-        connect={connect}
-        disconnect={disconnect}
-        buttonText={buttonText}
-      />
-      <Component {...pageProps} user={user} font={font} connected={connected} />
+      <NavBar/>
+      <Component {...pageProps} user={user} font={font} />
     </Main>
+    </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
