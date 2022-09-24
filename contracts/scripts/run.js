@@ -3,25 +3,47 @@ const hre = require('hardhat');
 const FontProjectJSON = require("../artifacts/contracts/FontProject.sol/FontProject.json");
 const FontProjectABI = FontProjectJSON.abi;
 const { Framework } = require("@superfluid-finance/sdk-core")
+const { deployFramework, deployWrapperSuperToken } = require("./utils/deploy-sf.js")
 
 async function main() {
   
-  const url = `${process.env.STAGING_INFURA_URL}`
-  const customHttpProvider = new hre.ethers.providers.JsonRpcProvider(url);
-  const network = await customHttpProvider.getNetwork();
-  
-  
-  
+  // const url = `${process.env.STAGING_INFURA_URL}`
+  // const customHttpProvider = new hre.ethers.providers.JsonRpcProvider(url);
+  // const network = await customHttpProvider.getNetwork();
+
+  const [admin, alice, bob] = await hre.ethers.getSigners();
+
+  const contractsFramework = await deployFramework(admin);
+    
+  // const sf = await Framework.create({
+  //   chainId: network.chainId,
+  //   provider: customHttpProvider
+  // })
+
   const sf = await Framework.create({
-    chainId: network.chainId,
-    provider: customHttpProvider
-  })
+    chainId: 31337,
+    provider: admin.provider,
+    resolverAddress: contractsFramework.resolver, // (empty)
+    protocolReleaseVersion: "test"
+  });
+
+  const tokenDeployment = await deployWrapperSuperToken(
+    admin,
+    contractsFramework.superTokenFactory,
+    "jp",
+    "jp"
+  )
+
+  jp = tokenDeployment.underlyingToken
+  jpx = tokenDeployment.superToken
   
   // console.log({ customHttpProvider, network, address: sf.settings.config.hostAddress })
-  const fontProjectFactory = await hre.ethers.getContractFactory("FontProject");
+  const fontProjectFactory = await hre.ethers.getContractFactory("FontProject", admin);
   const fontProjectContract = await fontProjectFactory.deploy(
     sf.settings.config.hostAddress, // Getting the Mumbai Host contract address from the Framework object
-    sf.settings.config.idaV1Address
+    sf.settings.config.idaV1Address,
+    jpx.address,
+    jp.address
   );
 
   await fontProjectContract.deployed();
@@ -42,34 +64,25 @@ async function main() {
   const [deployer, address1, address2] = await hre.ethers.getSigners();
 
   // Create event
-  try {
-    let txn = await fontProjectContract.connect(address1).createNewFontProject(
+  let txn = await fontProjectContract.createNewFontProject(
     timestamp,
     timestamp,
     mintPrice,
     metaDataCID
-    , {
-      gasLimit: 30000000
-    });
+  );
   
   let wait = await txn.wait();
-  console.log("FULL WAIT", wait);
-  console.log("NEW FONT CREATED:", wait);
-  } catch(err) {
-    console.log("ASDFS")
-    console.log(err)
-  }
 
-  // let eventId = wait.events[0].args.eventId;
-  // console.log("EVENT ID:", eventId);
+  let createFontProjectEvent = wait.events.find(({ event }) => event === 'NewFontProjectCreated');
+  console.log("FONT ID:", createFontProjectEvent.args.fontId);
+  const fontId = createFontProjectEvent.args.fontId;
 
 
   // Mint a font
-  // const [deployer, address1, address2] = await hre.ethers.getSigners();
 
-  // txn = await fontProjectContract.mintFontProject(eventId, { value: deposit });
-  // wait = await txn.wait();
-  // console.log("NEW RSVP:", wait.events[0].event, wait.events[0].args);
+  txn = await fontProjectContract.mintFontProject(fontId, { value: mintPrice });
+  wait = await txn.wait();
+  console.log("NEW FONT MINTED:", wait);
 
   // txn = await fontProjectContract
   //   .connect(address1)

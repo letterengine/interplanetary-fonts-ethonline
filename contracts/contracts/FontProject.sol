@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.14;
 
+import "hardhat/console.sol";
 import "./InterPlanetaryFontNFT.sol";
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -16,24 +17,29 @@ contract FontProject {
   uint8 constant OWNER_DISTRIBUTION_UNITS = 60;
   uint8 constant COLLABORATOR_DISTRIBUTION_UNITS = TOTAL_DISTRIBUTION_UNITS - OWNER_DISTRIBUTION_UNITS;
 
-  address constant MATIC_MUMBAI_CONTRACT = 0x0000000000000000000000000000000000001010;
-  address constant MATICX_MUMBAI_CONTRACT = 0x96B82B65ACF7072eFEb00502F45757F254c2a0D4;
+  // address constant MATIC_MUMBAI_CONTRACT = 0x0000000000000000000000000000000000001010;
+  // address constant MATICX_MUMBAI_CONTRACT = 0x96B82B65ACF7072eFEb00502F45757F254c2a0D4;
 
   /// @notice IDA Library
   using IDAv1Library for IDAv1Library.InitData;
   IDAv1Library.InitData internal _idaV1;
+  ISuperToken private superToken;
+  IERC20 private token;
   
   mapping(bytes32 => CreateFontProject) public idToFontProject;
 
   uint32 private currentIDAIndex = 0;
 
-  constructor(ISuperfluid _host, IInstantDistributionAgreementV1 _ida) {
+  constructor(ISuperfluid _host, IInstantDistributionAgreementV1 _ida, ISuperToken _superToken, IERC20 _token) {
 
     // IDA Library Initialize.
     _idaV1 = IDAv1Library.InitData(
         _host,
         _ida
     );
+
+    superToken = _superToken;
+    token = _token;
   }
 
   event NewFontProjectCreated(
@@ -89,7 +95,7 @@ contract FontProject {
 
     currentIDAIndex = currentIDAIndex + 1;
 
-    ISuperToken idaDistributionToken = ISuperToken(MATICX_MUMBAI_CONTRACT);
+    ISuperToken idaDistributionToken = ISuperToken(superToken);
 
     CreateFontProject memory font = CreateFontProject(
         fontId,
@@ -141,8 +147,8 @@ contract FontProject {
 
 
   function mintFontProject(
-    bytes32 fontId,
-    string memory uri
+    bytes32 fontId
+    // string memory uri
   ) external payable {
     CreateFontProject storage font = idToFontProject[fontId];
 
@@ -150,21 +156,21 @@ contract FontProject {
     require(msg.value == font.mintPrice, "NOT ENOUGH ETH SENT");
 
     // approving
-    IERC20(MATIC_MUMBAI_CONTRACT).approve(MATICX_MUMBAI_CONTRACT, msg.value);
+    IERC20(token).approve(address(superToken), msg.value);
 
     // wrapping
-    ISuperToken(MATICX_MUMBAI_CONTRACT).upgrade(msg.value);
+    ISuperToken(superToken).upgrade(msg.value);
 
 
-    uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
-    font.mints.push(tokenId);
+    // uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
+    // font.mints.push(tokenId);
 
-    distributeFontProfit(fontId);
+    // distributeFontProfit(fontId);
 
-    emit FontProjectMinted(
-      fontId,
-      tokenId
-    );
+    // emit FontProjectMinted(
+    //   fontId,
+    //   tokenId
+    // );
   }
 
   function indexOf(address[] memory arr, address searchFor) private pure returns (uint256) {
