@@ -79,7 +79,7 @@
   transition: all 0.25s ease;
 }
 
-@media screen {
+@media (hover) {
   .letter:hover {
     border-width: 4px;
   }
@@ -104,7 +104,14 @@
     grid-template-columns: repeat(8, 1fr);
     gap: 0.5rem 0.5rem;
   }
+
   .letter {
     font-size: 1rem;
+  }
+
+  .checkout {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
   }
 }

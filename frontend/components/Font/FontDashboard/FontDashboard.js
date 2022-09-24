@@ -56,7 +56,7 @@ export default function FontDashboard(props) {
         specimen={props.font.specimen}
       />
       <FontTester cssname={props.font.cssname} weight={props.font.weight} />
-      <p>
+      <p className='text-left'>
         Please select the characters you want to mint or select an option of
         pre-selected charsets in the list bellow.
       </p>

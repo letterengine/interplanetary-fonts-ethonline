@@ -16,11 +16,6 @@
   animation-iteration-count: infinite;
 }
 
-.container:hover {
-  background-color: var(--red);
-  color: var(--light);
-}
-
 @keyframes push-notification {
   0% {
     right: -15rem;
@@ -39,5 +34,14 @@
   }
   100% {
     right: -15rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+    max-width: 15rem;
+    top: auto;
+    bottom: 5vh;
   }
 }

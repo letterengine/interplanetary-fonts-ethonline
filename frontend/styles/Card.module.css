@@ -11,3 +11,9 @@
   align-self: flex-start;
   padding-bottom: 1rem;
 }
+
+@media screen and (max-width: 800px) {
+  .container {
+    align-self: center;
+  }
+}
