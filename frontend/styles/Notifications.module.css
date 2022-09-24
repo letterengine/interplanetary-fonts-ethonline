@@ -1,0 +1,43 @@
+.container {
+  width: 15rem;
+  max-width: 100%;
+  position: fixed;
+  right: -15rem;
+  top: 5vh;
+  border: 2px solid var(--red);
+  background-color: var(--light);
+  padding: 1rem;
+  border-radius: var(--global-radius);
+  cursor: pointer;
+  transition: all 0.5s ease;
+  animation-name: push-notification;
+  animation-duration: 10s;
+  animation-delay: 10s;
+  animation-iteration-count: infinite;
+}
+
+.container:hover {
+  background-color: var(--red);
+  color: var(--light);
+}
+
+@keyframes push-notification {
+  0% {
+    right: -15rem;
+  }
+  10% {
+    right: -15rem;
+  }
+  30% {
+    right: 5rem;
+  }
+  70% {
+    right: 5rem;
+  }
+  90% {
+    right: -15rem;
+  }
+  100% {
+    right: -15rem;
+  }
+}

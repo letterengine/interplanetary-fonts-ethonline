@@ -79,8 +79,10 @@
   transition: all 0.25s ease;
 }
 
-.letter:hover {
-  border-width: 4px;
+@media screen {
+  .letter:hover {
+    border-width: 4px;
+  }
 }
 
 .letter-checked {

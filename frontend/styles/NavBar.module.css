@@ -17,3 +17,30 @@
 .logo:hover {
   transform: scale(0.9);
 }
+
+.connected-container {
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: center;
+  border-top: 2px solid var(--red);
+  border-left: 2px solid var(--red);
+  border-right: 2px solid var(--red);
+  border-radius: var(--global-radius);
+}
+
+.connected-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border-bottom: 2px solid var(--red);
+  border-radius: var(--global-radius);
+  transition: all 0.5s ease;
+}
+
+.connected-container button:hover {
+  color: var(--red);
+}

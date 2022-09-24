@@ -1,25 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/reset.css';
 import '../styles/globals.css';
 
-import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { infuraProvider } from "wagmi/providers/infura";
-import { publicProvider } from "wagmi/providers/public";
+// Connect wallet modules
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  lightTheme,
+} from '@rainbow-me/rainbowkit';
+import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
+import { infuraProvider } from 'wagmi/providers/infura';
+import { publicProvider } from 'wagmi/providers/public';
 
+// Wallet connect objects
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
-
 const { chains, provider } = configureChains(
   [chain.polygon],
   [infuraProvider({ infuraId }), publicProvider()]
 );
-
 const { connectors } = getDefaultWallets({
-  appName: "frontend",
+  appName: 'frontend',
   chains,
 });
-
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
@@ -29,6 +32,7 @@ const wagmiClient = createClient({
 // Components
 import NavBar from '../components/UI/NavBar';
 import Main from '../components/UI/Main';
+import Notification from '../components/UI/Notification';
 
 // Dummy Data
 const fakeUser = {
@@ -76,14 +80,22 @@ const fakeUser = {
     charset:
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·$%()-.,',
     price: 30,
-  };
+  },
+  fakeNotifications = [
+    '@buyer has minted Test Font!',
+    '@contributor has pushed changes to Test Font',
+    'Your FontStream has been funded by @supporter',
+  ];
 
 export default function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState(undefined),
-    [font] = useState(fakeFont),
-    [connected, setConnected] = useState(false),
-    [buttonText, setButtonText] = useState('Connect');
+  const [font] = useState(fakeFont),
+    [user] = useState(fakeUser),
+    [connected, setConnected] = useState(true),
+    [cNotification, setCNotification] = useState('Check your notifications');
 
+  // Toggle comment to use simple fake data object
+  /*
+  const [buttonText, setButtonText] = useState('Connect');
   // Event handlers
   const connect = () => {
       setUser(fakeUser);
@@ -97,15 +109,47 @@ export default function MyApp({ Component, pageProps }) {
       setConnected(false);
       setButtonText('Connect');
     };
+  */
+
+  const handleConnected = bool => {
+    setConnected(bool);
+  };
+
+  useEffect(() => {
+    const pushNotification = setInterval(() => {
+      setCNotification(
+        fakeNotifications[
+          Math.trunc(Math.random() * fakeNotifications.length - 1)
+        ]
+      );
+    }, 10000);
+    return () => clearInterval(pushNotification);
+  }, [cNotification]);
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-    <Main>
-      <NavBar/>
-      <Component {...pageProps} user={user} font={font} />
-    </Main>
-    </RainbowKitProvider>
+      <RainbowKitProvider
+        chains={chains}
+        theme={lightTheme({
+          accentColor: '#ff3b6a',
+          accentColorForeground: '#ffffdd',
+          borderRadius: 'small',
+          fontStack: 'system',
+          overlayBlur: 'none',
+        })}
+        modalSize='compact'
+      >
+        <Main>
+          <NavBar handleConnected={handleConnected} />
+          <Component
+            {...pageProps}
+            font={font}
+            user={user}
+            connected={connected}
+          />
+          <Notification message={cNotification} />
+        </Main>
+      </RainbowKitProvider>
     </WagmiConfig>
   );
 }
