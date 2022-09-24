@@ -52,8 +52,7 @@
 }
 
 .cancel {
-  color: var(--red);
-  transition: all 0.5 ease;
+  display: none;
 }
 
 .hamburger-button {
@@ -115,5 +114,11 @@
   .nav-menu-closed {
     visibility: hidden;
     opacity: 0;
+  }
+
+  .cancel {
+    display: block;
+    color: var(--red);
+    transition: all 0.5 ease;
   }
 }

@@ -80,18 +80,13 @@ const fakeUser = {
     charset:
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·$%()-.,',
     price: 30,
-  },
-  fakeNotifications = [
-    '@buyer has minted Test Font!',
-    '@contributor has pushed changes to Test Font',
-    'Your FontStream has been funded by @supporter',
-  ];
+  };
 
 export default function MyApp({ Component, pageProps }) {
   const [font] = useState(fakeFont),
     [user] = useState(fakeUser),
     [connected, setConnected] = useState(true),
-    [cNotification, setCNotification] = useState('Check your notifications');
+    [cNotification, setCNotification] = useState(0);
 
   // Toggle comment to use simple fake data object
   /*
@@ -118,9 +113,7 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const pushNotification = setInterval(() => {
       setCNotification(
-        fakeNotifications[
-          Math.trunc(Math.random() * fakeNotifications.length - 1)
-        ]
+        prevNotifications => prevNotifications + Math.trunc(Math.random() * 5)
       );
     }, 10000);
     return () => clearInterval(pushNotification);
@@ -147,7 +140,11 @@ export default function MyApp({ Component, pageProps }) {
             user={user}
             connected={connected}
           />
-          <Notification message={cNotification} />
+          <Notification
+            message={`You have ${cNotification} EPNS notification${
+              cNotification <= 1 ? '' : 's'
+            }`}
+          />
         </Main>
       </RainbowKitProvider>
     </WagmiConfig>
