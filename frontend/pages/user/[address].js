@@ -25,18 +25,42 @@ export default function Profile(props) {
     getActiveButton = btns =>
       Object.values(btns)
         .filter(button => button.active)[0]
-        .txt.toLowerCase();
+        .txt.toLowerCase(),
+    getCurrentDashboard = (cb, sp) => {
+      return cb === 'created' && sp === 'creator' ? (
+        <Created />
+      ) : cb === 'collabs' && sp === 'creator' ? (
+        <Collabs />
+      ) : cb === 'treasury' && sp === 'creator' ? (
+        <Treasury />
+      ) : cb === 'collected' && sp === 'collector' ? (
+        <Collected />
+      ) : cb === 'funded' && sp === 'collector' ? (
+        <Funded />
+      ) : (
+        ''
+      );
+    };
   // State
   const [subprofile, setSubprofile] = useState('creator'),
-    [buttons, setButtons] = useState({ ...profileButtons }.creator),
-    [currentButton, setCurrentButton] = useState(getActiveButton(buttons));
+    [buttons] = useState({ ...profileButtons }),
+    [activeButtons, setActiveButtons] = useState(buttons[subprofile]),
+    [currentButton, setCurrentButton] = useState('created'),
+    [activeDashboard, setActiveDashboard] = useState(
+      getCurrentDashboard(currentButton, subprofile)
+    );
   // Event Handlers
   const handleSubprofile = sp => {
-      setSubprofile(sp.toLowerCase());
-      setButtons({ ...profileButtons }[sp.toLowerCase()]);
+      const splower = sp.toLowerCase(),
+        tempActive = buttons[splower],
+        tempActiveButton = getActiveButton(tempActive);
+      setSubprofile(splower);
+      setActiveButtons(tempActive);
+      setCurrentButton(tempActiveButton);
+      setActiveDashboard(getCurrentDashboard(tempActiveButton, splower));
     },
     handleActiveDashboard = e => {
-      setButtons(prevButtons => {
+      setActiveButtons(prevButtons => {
         const temp = Object.fromEntries(
           Object.entries(prevButtons).map(entry => {
             if (entry[1].txt === e.target.textContent) {
@@ -48,6 +72,9 @@ export default function Profile(props) {
           })
         );
         setCurrentButton(getActiveButton(temp));
+        setActiveDashboard(
+          getCurrentDashboard(getActiveButton(temp), subprofile)
+        );
         return temp;
       });
     };
@@ -61,24 +88,10 @@ export default function Profile(props) {
       />
       {props.connected ? (
         <ProfileDashboard
-          buttons={buttons}
+          buttons={activeButtons}
           handleActiveDashboard={handleActiveDashboard}
         >
-          {currentButton === 'created' ? (
-            <Created />
-          ) : currentButton === 'collabs' ? (
-            <Collabs />
-          ) : currentButton === 'treasury' ? (
-            <Treasury />
-          ) : currentButton === 'funded' ? (
-            <Collected />
-          ) : currentButton === 'funded' ? (
-            <Funded />
-          ) : currentButton === 'treasury' ? (
-            <Treasury />
-          ) : (
-            ''
-          )}
+          {activeDashboard}
         </ProfileDashboard>
       ) : (
         ''
