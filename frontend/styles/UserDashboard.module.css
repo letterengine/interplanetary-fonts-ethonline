@@ -2,7 +2,7 @@
   flex-basis: 100%;
   display: flex;
   gap: 1rem;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .button {
