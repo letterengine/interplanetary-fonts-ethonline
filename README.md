@@ -1,17 +1,21 @@
+
+<img src="https://storage.googleapis.com/ethglobal-api-production/projects/ekwuo/images/interplanetary-fonts-logo-duotone-bg-72-dpi.png" width="150" alt="Interplanetary Fonts"/>
+
 # Interplanetary Fonts
+A decentralized NFT marketplace for creators and collectors of Fonts.
 
 ## [ETHOnline 2022](https://online.ethglobal.com/) Hackathon Project
-
+Project page: https://ethglobal.com/showcase/interplanetary-fonts-ekwuo
 
 Team: [@eduairet](https://github.com/eduairet) [@hyperalchemy](https://github.com/hyperalchemy) [@jsanchez034](https://github.com/jsanchez034) [@miglconts](https://github.com/orgs/letterengine/people/miglconts)
 <br><br>
 
 ## Project Description:
-**Interplanetary Fonts** is a decentralized Font marketplace that allows creators to collaborate on projects and be retributed in real-time for their work while providing a flexible way for users to buy and use fonts according to their needs.
-<br><br>
+**Interplanetary Fonts** is a decentralized NFT platform where creators can share and collaborate on Font projects while receiving real-time payments by project-funders. Users of the platform can view, fund or mint any Font-NFT project deployed and decide whether to mint an entire charset or only a few characters, according to their needs.
 
 ## How it's made
-The project is built on Polygon and uses Worldcoin + Lens to create a user friendly marketplace platform. Superfluid is used for the payment part, and artifacts (fonts and typeface) are hosted on IPFS.
+The application is interacting with a smart contracts deployed on Polygon Mumbai testnet for NFT minting with IPFS and to fund projects/pay creators (using Superfluid streaming protocol). <br>
+Users can connect with their wallet to the application, fund projects or mint NFTs, and can create new projects only by verifying with Worldcoin proof-of-personhood. 
 <br><br>
 
 ## How to run 
@@ -36,6 +40,8 @@ The project is built on Polygon and uses Worldcoin + Lens to create a user frien
 ```
 3. Run the app 
 ```bash
-    $ pnpm dev:frontend
+    $ pnpm run dev:frontend
 ```
  4. View on browser: http://localhost:3000
+
+

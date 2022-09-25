@@ -1,0 +1,33 @@
+.buttons {
+  flex-basis: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.button {
+  width: 100%;
+}
+
+.active {
+  background-color: var(--darkblue);
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+@media (hover) {
+  .active:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .button {
+    max-width: 15rem;
+  }
+}
