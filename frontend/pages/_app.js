@@ -107,7 +107,6 @@ export default function MyApp({ Component, pageProps }) {
   */
 
   const handleConnected = bool => {
-    console.log(bool);
     setConnected(bool);
   };
 
@@ -141,11 +140,15 @@ export default function MyApp({ Component, pageProps }) {
             user={user}
             connected={connected}
           />
-          <Notification
-            message={`You have ${cNotification} EPNS notification${
-              cNotification <= 1 ? '' : 's'
-            }`}
-          />
+          {connected ? (
+            <Notification
+              message={`You have ${cNotification} EPNS notification${
+                cNotification <= 1 ? '' : 's'
+              }`}
+            />
+          ) : (
+            ''
+          )}
         </Main>
       </RainbowKitProvider>
     </WagmiConfig>

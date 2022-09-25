@@ -30,9 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border-bottom: 2px solid var(--red);
   border-radius: var(--global-radius);
   transition: all 0.5s ease;
 }
@@ -49,6 +47,19 @@
   justify-content: flex-end;
   background-color: var(--light);
   gap: 2rem;
+}
+
+.network-profile {
+  width: 100%;
+  display: flex;
+  border-top: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+}
+
+.network-profile button {
+  border: none;
+  border-radius: 0;
+  flex-basis: 50%;
 }
 
 .cancel {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
@@ -10,14 +10,9 @@ import ConnectButton from './ConnectButton';
 import ConnectedMenu from './ConnectedMenu';
 */
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useDisconnect } from 'wagmi';
 
 export default function NavBar(props) {
   // use props when not wallet connect
-  // Ethereum client
-  const { data: account } = useAccount(),
-    { disconnect } = useDisconnect();
-  // State
   const [navbarOpen, setNavbarOpen] = useState(false);
   /*
   //When fake data is used
@@ -104,7 +99,9 @@ export default function NavBar(props) {
               chain &&
               (!authenticationStatus ||
                 authenticationStatus === 'authenticated');
-            props.handleConnected(connected ? true : false);
+            useEffect(() => {
+              props.handleConnected(connected ? true : false);
+            }, [connected]);
             return (
               <div
                 {...(!ready && {
@@ -145,36 +142,38 @@ export default function NavBar(props) {
                           ? ` (${account.displayBalance})`
                           : ''}
                       </button>
-                      <button
-                        onClick={openChainModal}
-                        style={{ borderRadius: 0 }}
-                        type='button'
-                      >
-                        {chain.hasIcon && (
-                          <div
-                            style={{
-                              background: chain.iconBackground,
-                              width: 12,
-                              height: 12,
-                              borderRadius: 999,
-                              overflow: 'hidden',
-                              marginRight: 4,
-                            }}
-                          >
-                            {chain.iconUrl && (
-                              <img
-                                alt={chain.name ?? 'Chain icon'}
-                                src={chain.iconUrl}
-                                style={{ width: 12, height: 12 }}
-                              />
-                            )}
-                          </div>
-                        )}
-                        {chain.name}
-                      </button>
-                      <Link href={`/user/${account.address}`}>
-                        <button>Profile</button>
-                      </Link>
+                      <div className={classes['network-profile']}>
+                        <button
+                          style={{ borderRight: '2px solid var(--red)' }}
+                          onClick={openChainModal}
+                          type='button'
+                        >
+                          {chain.hasIcon && (
+                            <div
+                              style={{
+                                background: chain.iconBackground,
+                                width: 12,
+                                height: 12,
+                                borderRadius: 999,
+                                overflow: 'hidden',
+                                marginRight: 4,
+                              }}
+                            >
+                              {chain.iconUrl && (
+                                <img
+                                  alt={chain.name ?? 'Chain icon'}
+                                  src={chain.iconUrl}
+                                  style={{ width: 12, height: 12 }}
+                                />
+                              )}
+                            </div>
+                          )}
+                          {chain.name}
+                        </button>
+                        <Link href={`/user/${account.address}`}>
+                          <button>Profile</button>
+                        </Link>
+                      </div>
                     </div>
                   );
                 })()}
