@@ -1,8 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+  /* Brand colors */
   --red: #ff3b6a;
   --yellow: #ffff5a;
+  --light: #ffffdd;
   --cyan: #32f9e1;
   --darkblue: #020866;
+  /* Global values */
+  --global-radius: 4px;
 }
 
 * {
@@ -13,7 +21,15 @@ html,
 body {
   text-align: center;
   font-family: sans-serif;
-  background-color: var(--darkblue);
+  background-color: var(--light);
+  color: var(--darkblue);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
 }
 
 h1,
@@ -26,31 +42,39 @@ h6 {
 }
 
 h1 {
-  font-size: 5rem;
-}
-
-h2 {
-  font-size: 4.5rem;
-}
-
-h3 {
-  font-size: 4rem;
-}
-
-h4 {
   font-size: 3.5rem;
 }
 
-h5 {
+h2 {
   font-size: 3rem;
 }
 
-h6 {
+h3 {
   font-size: 2.5rem;
 }
 
-p {
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
   font-size: 1rem;
+}
+
+p,
+a {
+  font-size: 1rem;
+}
+
+a {
+  color: var(--red);
+  font-style: italic;
+  transition: all 0.5s ease 0s;
+  cursor: pointer;
 }
 
 em {
@@ -59,4 +83,10 @@ em {
 
 strong {
   font-weight: 600;
+}
+
+@media (hover) {
+  a:hover {
+    color: var(--darkblue);
+  }
 }
