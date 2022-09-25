@@ -52,6 +52,17 @@ const fakeUser = {
       { icon: 'DC', url: 'https://discordapp.com/users/gutentype#5922' },
       { icon: 'IG', url: 'https://www.instagram.com/gutentype' },
     ],
+    created: [{ txt: 'This User Project', url: '/font/test-font' }],
+    collabs: [
+      { txt: 'Other User Project', cstatus: true },
+      { txt: 'Other User Project', cstatus: false },
+    ],
+    treasury: {
+      balance: 3260.1,
+      fontStreams: [{ txt: 'Some FontStream', ammount: '32.15' }],
+    },
+    collected: [{ txt: 'Some Font Collected', url: '/font/test-font' }],
+    funded: [{ txt: 'Some Font Stream' }],
   },
   fakeFont = {
     nme: 'Sans Serif',

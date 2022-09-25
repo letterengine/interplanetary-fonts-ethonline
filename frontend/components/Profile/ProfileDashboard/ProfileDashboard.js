@@ -1,5 +1,3 @@
-import classes from '../../../styles/UserDashboard.module.css';
-// Components
 import DashboardContent from '../../UI/DashboardContent';
 import UserButtons from './UserButtons';
 
@@ -10,6 +8,7 @@ export default function ProfileDashboard(props) {
         buttons={props.buttons}
         handleActiveDashboard={props.handleActiveDashboard}
       />
+      {props.children}
     </DashboardContent>
   );
 }
