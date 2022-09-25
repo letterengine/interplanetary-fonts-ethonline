@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.14;
+pragma solidity ^0.8.16;
 
 import "hardhat/console.sol";
 import "./InterPlanetaryFontNFT.sol";
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {ISuperfluid, ISuperToken, SuperAppBase, SuperAppDefinitions} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol";
+import {ISuperfluid, ISuperToken} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol";
+import { ISETH } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/tokens/ISETH.sol";
 import {IInstantDistributionAgreementV1} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IInstantDistributionAgreementV1.sol";
 
 import {IDAv1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/IDAv1Library.sol";
@@ -23,14 +24,13 @@ contract FontProject {
   /// @notice IDA Library
   using IDAv1Library for IDAv1Library.InitData;
   IDAv1Library.InitData internal _idaV1;
-  ISuperToken private superToken;
-  IERC20 private token;
+  address private superToken;
   
   mapping(bytes32 => CreateFontProject) public idToFontProject;
 
   uint32 private currentIDAIndex = 0;
 
-  constructor(ISuperfluid _host, IInstantDistributionAgreementV1 _ida, ISuperToken _superToken, IERC20 _token) {
+  constructor(ISuperfluid _host, IInstantDistributionAgreementV1 _ida, address _superToken) {
 
     // IDA Library Initialize.
     _idaV1 = IDAv1Library.InitData(
@@ -39,7 +39,6 @@ contract FontProject {
     );
 
     superToken = _superToken;
-    token = _token;
   }
 
   event NewFontProjectCreated(
@@ -120,7 +119,7 @@ contract FontProject {
       font.idaDistributionToken,
       font.royaltyIDAIndex,
       msg.sender,
-      OWNER_DISTRIBUTION_UNITS
+      1
     );
 
     emit NewFontProjectCreated(
@@ -138,48 +137,46 @@ contract FontProject {
 
     require(font.startDateTime != 0, "FONT NOT FOUND");
     require(font.creatorAddress == msg.sender, "ONLY FONT CREATOR CAN UPDATE COLLABORATORS");
-    require(indexOf(font.collaborators, collaborator) >= 0, "ALREADY A COLLABORATOR");
+    require(!contains(font.collaborators, collaborator), "ALREADY A COLLABORATOR");
 
-    font.collaborators.push(msg.sender);
+    font.collaborators.push(collaborator);
 
     setFontCollaboratorProfitDistribution(font.id, COLLABORATOR_DISTRIBUTION_UNITS);
   }
 
 
   function mintFontProject(
-    bytes32 fontId
-    // string memory uri
+    bytes32 fontId,
+    string memory uri
   ) external payable {
     CreateFontProject storage font = idToFontProject[fontId];
 
     require(font.startDateTime != 0, "FONT NOT FOUND");
     require(msg.value == font.mintPrice, "NOT ENOUGH ETH SENT");
 
-    // approving
-    IERC20(token).approve(address(superToken), msg.value);
 
-    // wrapping
-    ISuperToken(superToken).upgrade(msg.value);
+    ISETH(superToken).upgradeByETHTo{ value : msg.value }(address(this));
+    console.log("Contract Super ETH Balance", ISuperToken(superToken).balanceOf(address(this)));
+    console.log("Contract Regular Balance", address(this).balance);
+    
+    uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
+    font.mints.push(tokenId);
 
+    distributeFontProfit(fontId);
 
-    // uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
-    // font.mints.push(tokenId);
-
-    // distributeFontProfit(fontId);
-
-    // emit FontProjectMinted(
-    //   fontId,
-    //   tokenId
-    // );
+    emit FontProjectMinted(
+      fontId,
+      tokenId
+    );
   }
 
-  function indexOf(address[] memory arr, address searchFor) private pure returns (uint256) {
+  function contains(address[] memory arr, address searchFor) private pure returns (bool) {
     for (uint256 i = 0; i < arr.length; i++) {
       if (arr[i] == searchFor) {
-        return i;
+        return true;
       }
     }
-    revert("NOT FOUND");
+    return false;
   }
 
   function setFontCollaboratorProfitDistribution(bytes32 fontId, uint128 distributionUnits) private {
@@ -207,6 +204,8 @@ contract FontProject {
 
     uint256 spreaderTokenBalance = font.idaDistributionToken.balanceOf(address(this));
 
+    console.log("spreaderTokenBalance", spreaderTokenBalance);
+
     (uint256 actualDistributionAmount, ) = _idaV1.ida.calculateDistribution(
         font.idaDistributionToken,
         address(this),
@@ -215,5 +214,7 @@ contract FontProject {
     );
 
     _idaV1.distribute(font.idaDistributionToken, font.royaltyIDAIndex, actualDistributionAmount);
+
+    console.log("Contract SETH balance after distribution", ISuperToken(superToken).balanceOf(address(this)));
   }
 }

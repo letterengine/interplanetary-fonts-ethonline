@@ -3,6 +3,9 @@ const SlotsBitmapLibrary = require("@superfluid-finance/ethereum-contracts/build
 const SuperToken = require("@superfluid-finance/ethereum-contracts/build/contracts/SuperToken.json")
 const SuperfluidFrameworkDeployerContract = require("@superfluid-finance/ethereum-contracts/build/contracts/SuperfluidFrameworkDeployer.json")
 const { ethers } = require("ethers")
+const { artifacts } = require("hardhat");
+const ISETH = artifacts.require("ISETH");
+const SETHProxy = artifacts.require("SETHProxy");
 
 const slotsBitmapLibraryPlaceholder = "__SlotsBitmapLibrary____________________"
 const ERC1820_DEPLOYER = "0xa990077c3205cbDf861e17Fa532eeB069cE9fF96"
@@ -96,4 +99,34 @@ async function deployWrapperSuperToken(
   return { underlyingToken, superToken }
 }
 
-module.exports = { deployFramework, deployWrapperSuperToken }
+
+const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+
+async function deployNativeSuperToken(
+  admin,
+  superTokenFactoryAddress,
+  tokenSymbol
+) {
+
+  const superTokenFactory = new ethers.Contract(
+    superTokenFactoryAddress,
+    ["function initializeCustomSuperToken(address)"],
+    admin
+  )
+
+  console.log("Creating SETH Proxy...");
+  const sethProxy = await SETHProxy.new();
+  const seth = await ISETH.at(sethProxy.address);
+  console.log("Intialize SETH as a custom super token...");
+  await superTokenFactory.initializeCustomSuperToken(seth.address);
+  console.log("Intialize SETH token info...");
+  await seth.initialize(
+    ZERO_ADDRESS,
+    18,
+    `Super ${tokenSymbol}`,
+    `${tokenSymbol}x`
+  );
+  return seth;
+}
+
+module.exports = { deployFramework, deployWrapperSuperToken, deployNativeSuperToken }

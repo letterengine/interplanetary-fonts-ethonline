@@ -3,57 +3,39 @@ const hre = require('hardhat');
 const FontProjectJSON = require("../artifacts/contracts/FontProject.sol/FontProject.json");
 const FontProjectABI = FontProjectJSON.abi;
 const { Framework } = require("@superfluid-finance/sdk-core")
-const { deployFramework, deployWrapperSuperToken } = require("./utils/deploy-sf.js")
+const { deployFramework, deployWrapperSuperToken, deployNativeSuperToken } = require("./utils/deploy-sf.js")
 
 async function main() {
-  
-  // const url = `${process.env.STAGING_INFURA_URL}`
-  // const customHttpProvider = new hre.ethers.providers.JsonRpcProvider(url);
-  // const network = await customHttpProvider.getNetwork();
-
-  const [admin, alice, bob] = await hre.ethers.getSigners();
+  const [admin, alice, bob, tom] = await hre.ethers.getSigners();
 
   const contractsFramework = await deployFramework(admin);
-    
-  // const sf = await Framework.create({
-  //   chainId: network.chainId,
-  //   provider: customHttpProvider
-  // })
 
   const sf = await Framework.create({
     chainId: 31337,
     provider: admin.provider,
     resolverAddress: contractsFramework.resolver, // (empty)
-    protocolReleaseVersion: "test"
+    protocolReleaseVersion: "test",
+
   });
 
-  const tokenDeployment = await deployWrapperSuperToken(
+  const seth = await deployNativeSuperToken(
     admin,
     contractsFramework.superTokenFactory,
-    "jp",
-    "jp"
-  )
+    "ETH",
+  );
 
-  jp = tokenDeployment.underlyingToken
-  jpx = tokenDeployment.superToken
+  console.log("deployNativeSuperToken", seth.address);
   
-  // console.log({ customHttpProvider, network, address: sf.settings.config.hostAddress })
   const fontProjectFactory = await hre.ethers.getContractFactory("FontProject", admin);
   const fontProjectContract = await fontProjectFactory.deploy(
     sf.settings.config.hostAddress, // Getting the Mumbai Host contract address from the Framework object
     sf.settings.config.idaV1Address,
-    jpx.address,
-    jp.address
+    seth.address
   );
 
   await fontProjectContract.deployed();
   console.log("Contract deployed to:", fontProjectContract.address);
 
-  // const fontProject = new hre.ethers.Contract(
-  //   fontProjectContract.address,
-  //   FontProjectABI,
-  //   customHttpProvider
-  // );
 
   let mintPrice = hre.ethers.utils.parseEther("1");
   let maxCapacity = 3;
@@ -63,8 +45,8 @@ async function main() {
 
   const [deployer, address1, address2] = await hre.ethers.getSigners();
 
-  // Create event
-  let txn = await fontProjectContract.createNewFontProject(
+  // Create a Font
+  let txn = await fontProjectContract.connect(alice).createNewFontProject(
     timestamp,
     timestamp,
     mintPrice,
@@ -77,38 +59,24 @@ async function main() {
   console.log("FONT ID:", createFontProjectEvent.args.fontId);
   const fontId = createFontProjectEvent.args.fontId;
 
-
-  // Mint a font
-
-  txn = await fontProjectContract.mintFontProject(fontId, { value: mintPrice });
+  // Add collaborators
+  txn = await fontProjectContract.connect(alice).addCollaborator(fontId, tom.address);
   wait = await txn.wait();
-  console.log("NEW FONT MINTED:", wait);
+  console.log("Collaborator added");
 
-  // txn = await fontProjectContract
-  //   .connect(address1)
-  //   .createNewRSVP(eventId, { value: deposit });
-  // wait = await txn.wait();
-  // console.log("NEW RSVP:", wait.events[0].event, wait.events[0].args);
+  // // Mint a font
+  console.log("alice.address", alice.address);
+  const a = await seth.balanceOf(alice.address);
+  console.log('alice seth balance before', a.toString());
 
-  // txn = await fontProjectContract
-  //   .connect(address2)
-  //   .createNewRSVP(eventId, { value: deposit });
-  // wait = await txn.wait();
-  // console.log("NEW RSVP:", wait.events[0].event, wait.events[0].args);
+  txn = await fontProjectContract.connect(bob).mintFontProject(fontId, "some nft uri", { value: mintPrice });
+  wait = await txn.wait();
+  console.log("NEW FONT MINTED:");
 
-  // // Confirm all attendees
-  // txn = await fontProjectContract.confirmAllAttendees(eventId);
-  // wait = await txn.wait();
-  // wait.events.forEach((event) =>
-  //   console.log("CONFIRMED:", event.args.attendeeAddress)
-  // );
+  const b = await seth.balanceOf(alice.address);
+  console.log('alice seth balance after', b.toString())
 
-  // // Withdraw unclaimed deposits
-  // await hre.network.provider.send("evm_increaseTime", [15778800000000]); // wait 10 years
 
-  // txn = await fontProjectContract.withdrawUnclaimedDeposits(eventId);
-  // wait = await txn.wait();
-  // console.log("WITHDRAWN:", wait.events[0].event, wait.events[0].args);
 }
 
 async function runMain() {
