@@ -11,8 +11,8 @@
   cursor: pointer;
   transition: all 0.5s ease;
   animation-name: push-notification;
-  animation-duration: 10s;
-  animation-delay: 10s;
+  animation-duration: 20s;
+  animation-delay: 20s;
   animation-iteration-count: infinite;
 }
 
@@ -20,16 +20,16 @@
   0% {
     right: -15rem;
   }
-  10% {
+  40% {
     right: -15rem;
   }
-  30% {
+  45% {
     right: 5rem;
   }
-  70% {
+  55% {
     right: 5rem;
   }
-  90% {
+  60% {
     right: -15rem;
   }
   100% {
@@ -40,7 +40,7 @@
 @media screen and (max-width: 800px) {
   .container {
     width: 100%;
-    visibility: visible;
+    visibility: hidden;
     max-width: 15rem;
     top: auto;
     bottom: 5vh;
@@ -56,19 +56,19 @@
       visibility: hidden;
       opacity: 0;
     }
-    10% {
+    40% {
       visibility: hidden;
       opacity: 0;
     }
-    30% {
+    45% {
       visibility: visible;
       opacity: 1;
     }
-    70% {
+    55% {
       visibility: visible;
       opacity: 1;
     }
-    90% {
+    60% {
       visibility: hidden;
       opacity: 0;
     }

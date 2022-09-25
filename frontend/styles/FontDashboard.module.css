@@ -19,7 +19,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
   padding: 2rem 2rem 3rem 2rem;
 }
 
@@ -29,6 +28,10 @@
 
 .specimen p {
   font-size: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .tester {
@@ -79,12 +82,6 @@
   transition: all 0.25s ease;
 }
 
-@media (hover) {
-  .letter:hover {
-    border-width: 4px;
-  }
-}
-
 .letter-checked {
   background-color: var(--red);
   border: 2px solid var(--darkblue);
@@ -97,6 +94,12 @@
   gap: 4rem;
   align-items: center;
   justify-content: flex-end;
+}
+
+@media (hover) {
+  .letter:hover {
+    border-width: 4px;
+  }
 }
 
 @media screen and (max-width: 600px) {

@@ -115,7 +115,7 @@ export default function MyApp({ Component, pageProps }) {
       setCNotification(
         prevNotifications => prevNotifications + Math.trunc(Math.random() * 5)
       );
-    }, 10000);
+    }, 20000);
     return () => clearInterval(pushNotification);
   }, [cNotification]);
 
