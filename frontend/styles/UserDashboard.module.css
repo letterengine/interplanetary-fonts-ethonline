@@ -1,5 +1,4 @@
 .buttons {
-  flex-basis: 100%;
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -13,6 +12,12 @@
   background-color: var(--darkblue);
   border-color: var(--yellow);
   color: var(--yellow);
+}
+
+.profile-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 @media (hover) {
