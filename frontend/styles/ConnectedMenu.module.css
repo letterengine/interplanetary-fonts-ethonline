@@ -21,6 +21,8 @@
   transition: all 0.5s ease;
 }
 
-.user-profile:hover {
-  color: var(--red);
+@media (hover) {
+  .user-profile:hover {
+    color: var(--red);
+  }
 }

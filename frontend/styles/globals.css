@@ -77,14 +77,16 @@ a {
   cursor: pointer;
 }
 
-a:hover {
-  color: var(--darkblue);
-}
-
 em {
   font-style: italic;
 }
 
 strong {
   font-weight: 600;
+}
+
+@media (hover) {
+  a:hover {
+    color: var(--darkblue);
+  }
 }

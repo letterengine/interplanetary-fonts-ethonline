@@ -22,10 +22,6 @@
   transition: all 0.5s ease;
 }
 
-.avatar:hover {
-  border-color: var(--yellow);
-}
-
 .follow {
   display: flex;
   gap: 0.5rem;
@@ -33,6 +29,10 @@
 
 .follow-el {
   font-size: 0.7rem;
+}
+
+.edit {
+  transition: all 0.5s ease;
 }
 
 .about {
@@ -69,12 +69,22 @@
   text-decoration: none;
 }
 
-.handle:hover {
-  color: var(--yellow);
-  background-color: var(--red);
-}
-
 .handle:active {
   color: var(--darkblue);
   background-color: var(--yellow);
+}
+
+@media (hover) {
+  .avatar:hover {
+    border-color: var(--yellow);
+  }
+
+  .handle:hover {
+    color: var(--yellow);
+    background-color: var(--red);
+  }
+
+  .edit:hover {
+    color: var(--red);
+  }
 }

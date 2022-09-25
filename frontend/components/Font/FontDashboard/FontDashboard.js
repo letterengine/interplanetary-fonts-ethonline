@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import classes from '../../../styles/FontDashboard.module.css';
 // Components
+// Components
+import DashboardContent from '../../UI/DashboardContent';
 import Charset from './Charset';
 import CharsetList from './CharsetList';
 import FontTester from './FontTester';
@@ -48,7 +50,7 @@ export default function FontDashboard(props) {
       setPrice(filteredChars.filter(ch => ch.checked).length * unit);
     };
   return (
-    <div className={classes.container}>
+    <DashboardContent>
       <Specimen
         fontname={props.font.nme}
         cssname={props.font.cssname}
@@ -74,6 +76,6 @@ export default function FontDashboard(props) {
         <h5>Price: {price.toFixed(2)} USDC</h5>
         <MintButton />
       </div>
-    </div>
+    </DashboardContent>
   );
 }

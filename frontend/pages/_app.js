@@ -107,6 +107,7 @@ export default function MyApp({ Component, pageProps }) {
   */
 
   const handleConnected = bool => {
+    console.log(bool);
     setConnected(bool);
   };
 

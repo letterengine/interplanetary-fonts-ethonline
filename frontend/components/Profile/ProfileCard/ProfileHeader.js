@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import classes from '../../../styles/ProfileHeader.module.css';
 // Components
@@ -16,11 +17,11 @@ export default function ProfileHeader(props) {
       { nme: 'Collector', active: false, path: '/profile/collector' }, // Add username
     ]);
   // Event handlers
-  const handleActiveButtons = clickedButton => {
+  const handleActiveButtons = pressed => {
     setBtns(prevBtns =>
       prevBtns.map(btn => {
         btn.nme = btn.nme;
-        btn.active = btn.nme === clickedButton ? true : false;
+        btn.active = btn.nme === pressed ? true : false;
         btn.path = btn.path;
         return btn;
       })
@@ -28,11 +29,7 @@ export default function ProfileHeader(props) {
   };
   // Component
   return (
-    <CardHeader
-      handleSubprofile={props.handleSubprofile}
-      title='Profile'
-      color={cardColor}
-    >
+    <CardHeader title='Profile' color={cardColor}>
       <div className={classes.buttons}>
         {props.connected ? (
           btns.map((btn, i) => {
@@ -41,6 +38,7 @@ export default function ProfileHeader(props) {
                 key={`btn-${i}`}
                 active={btn.active}
                 color={cardColor}
+                handleSubprofile={props.handleSubprofile}
                 handleActiveButtons={handleActiveButtons}
               >
                 {btn.nme}
@@ -48,14 +46,21 @@ export default function ProfileHeader(props) {
             );
           })
         ) : (
-          <CardHeaderButton
-            className={classes.onecol}
-            active={false}
-            color={cardColor}
-            handleActiveButtons={handleActiveButtons}
+          <a
+            style={{ width: '100%', display: 'flex' }}
+            href='https://lenster.xyz/'
+            target='blank'
           >
-            Follow
-          </CardHeaderButton>
+            <CardHeaderButton
+              className={classes.onecol}
+              active={false}
+              color={cardColor}
+              handleSubprofile={() => console.log('subprofile')}
+              handleActiveButtons={() => console.log('follow')}
+            >
+              Follow
+            </CardHeaderButton>
+          </a>
         )}
       </div>
     </CardHeader>

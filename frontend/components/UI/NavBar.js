@@ -4,8 +4,11 @@ import Image from 'next/image';
 import logo from '../../public/logoHeader.svg';
 import classes from '../../styles/NavBar.module.css';
 import Button from '../UI/Button';
-// import ConnectButton from './ConnectButton'; // Fake data only
+/*
+Fake data only
+import ConnectButton from './ConnectButton';
 import ConnectedMenu from './ConnectedMenu';
+*/
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -28,13 +31,8 @@ export default function NavBar(props) {
       }
     };
   */
-  const handleDisconnect = () => {
-    disconnect();
-    props.handleConnected(false);
-  };
 
   const handleHamburgerMenu = () => {
-    console.log('menu');
     setNavbarOpen(!navbarOpen);
   };
 
@@ -87,109 +85,103 @@ export default function NavBar(props) {
               user={props.user}
               handleDisconnect={handleDisconnect}
             /> */}
-        {account ? (
-          <div>
-            <ConnectedMenu account={account} disconnect={handleDisconnect} />
-          </div>
-        ) : (
-          <ConnectButton.Custom>
-            {({
-              account,
-              chain,
-              openAccountModal,
-              openChainModal,
-              openConnectModal,
-              authenticationStatus,
-              mounted,
-            }) => {
-              // Note: If your app doesn't use authentication, you
-              // can remove all 'authenticationStatus' checks
-              const ready = mounted && authenticationStatus !== 'loading';
-              const connected =
-                ready &&
-                account &&
-                chain &&
-                (!authenticationStatus ||
-                  authenticationStatus === 'authenticated');
-
-              return (
-                <div
-                  {...(!ready && {
-                    'aria-hidden': true,
-                    style: {
-                      opacity: 0,
-                      pointerEvents: 'none',
-                      userSelect: 'none',
-                    },
-                  })}
-                >
-                  {(() => {
-                    if (!connected) {
-                      return (
-                        <Button onClick={openConnectModal} type='button'>
-                          Connect Wallet
-                        </Button>
-                      );
-                    }
-
-                    if (chain.unsupported) {
-                      return (
-                        <Button onClick={openChainModal} type='button'>
-                          Wrong network
-                        </Button>
-                      );
-                    }
-
+        <ConnectButton.Custom>
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openChainModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            // Note: If your app doesn't use authentication, you
+            // can remove all 'authenticationStatus' checks
+            const ready = mounted && authenticationStatus !== 'loading';
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === 'authenticated');
+            props.handleConnected(connected ? true : false);
+            return (
+              <div
+                {...(!ready && {
+                  'aria-hidden': true,
+                  style: {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  },
+                })}
+              >
+                {(() => {
+                  if (!connected) {
                     return (
-                      <div className={classes['connected-container']}>
-                        <button
-                          style={{ borderRadius: 0 }}
-                          onClick={openAccountModal}
-                          type='button'
-                        >
-                          {account.displayName}
-                          {account.displayBalance
-                            ? ` (${account.displayBalance})`
-                            : ''}
-                        </button>
-                        <button
-                          onClick={openChainModal}
-                          style={{ borderRadius: 0 }}
-                          type='button'
-                        >
-                          {chain.hasIcon && (
-                            <div
-                              style={{
-                                background: chain.iconBackground,
-                                width: 12,
-                                height: 12,
-                                borderRadius: 999,
-                                overflow: 'hidden',
-                                marginRight: 4,
-                              }}
-                            >
-                              {chain.iconUrl && (
-                                <img
-                                  alt={chain.name ?? 'Chain icon'}
-                                  src={chain.iconUrl}
-                                  style={{ width: 12, height: 12 }}
-                                />
-                              )}
-                            </div>
-                          )}
-                          {chain.name}
-                        </button>
-                        <Link href={`/user/${account.address}`}>
-                          <button>Profile</button>
-                        </Link>
-                      </div>
+                      <Button onClick={openConnectModal} type='button'>
+                        Connect Wallet
+                      </Button>
                     );
-                  })()}
-                </div>
-              );
-            }}
-          </ConnectButton.Custom>
-        )}
+                  }
+
+                  if (chain.unsupported) {
+                    return (
+                      <Button onClick={openChainModal} type='button'>
+                        Wrong network
+                      </Button>
+                    );
+                  }
+
+                  return (
+                    <div className={classes['connected-container']}>
+                      <button
+                        style={{ borderRadius: 0 }}
+                        onClick={openAccountModal}
+                        type='button'
+                      >
+                        {account.displayName}
+                        {account.displayBalance
+                          ? ` (${account.displayBalance})`
+                          : ''}
+                      </button>
+                      <button
+                        onClick={openChainModal}
+                        style={{ borderRadius: 0 }}
+                        type='button'
+                      >
+                        {chain.hasIcon && (
+                          <div
+                            style={{
+                              background: chain.iconBackground,
+                              width: 12,
+                              height: 12,
+                              borderRadius: 999,
+                              overflow: 'hidden',
+                              marginRight: 4,
+                            }}
+                          >
+                            {chain.iconUrl && (
+                              <img
+                                alt={chain.name ?? 'Chain icon'}
+                                src={chain.iconUrl}
+                                style={{ width: 12, height: 12 }}
+                              />
+                            )}
+                          </div>
+                        )}
+                        {chain.name}
+                      </button>
+                      <Link href={`/user/${account.address}`}>
+                        <button>Profile</button>
+                      </Link>
+                    </div>
+                  );
+                })()}
+              </div>
+            );
+          }}
+        </ConnectButton.Custom>
         <button className={classes.cancel} onClick={handleHamburgerMenu}>
           Cancel
         </button>
