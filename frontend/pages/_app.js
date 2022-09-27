@@ -82,7 +82,8 @@ const fakeUser = {
   fakeFont = {
     nme: 'Paradisio',
     cssname: 'Paradisio',
-    weight: 700,
+    style: 'normal',
+    weight: 400,
     creators: [
       {
         username: 'gutentype',
@@ -90,6 +91,8 @@ const fakeUser = {
       },
     ],
     description: 'Badass Sans Serif Latin Font with English support',
+    ipfs: 'https://ipfs.io/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf',
+    format: 'format',
     streams: ['Add ligatures', 'Add French Support'],
     collected: [
       {

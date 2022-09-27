@@ -1,3 +1,10 @@
+/* @font-face {
+  font-family: Paradisio;
+  src: url(./Fonts/Paradisio-IF.woff2) format('woff2'),
+    url(./Fonts/Paradisio-IF.woff) format('woff'),
+    url(./Fonts/Paradisio-IF.otf) format('opentype');
+} */
+
 .charset-container {
   display: flex;
 }

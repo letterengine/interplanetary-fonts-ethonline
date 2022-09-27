@@ -49,6 +49,20 @@ export default function FontDashboard(props) {
       setChars(filteredChars);
       setPrice(filteredChars.filter(ch => ch.checked).length * unit);
     };
+  // Load IPFS Font
+  async function loadFonts() {
+    const font = new FontFace(props.font.nme, `url(${props.font.ipfs})`, {
+      style: props.font.style,
+      weight: props.font.weight,
+    });
+    // wait for font to be loaded
+    await font.load();
+    // add font to document
+    document.fonts.add(font);
+    // enable font with CSS class
+    document.body.classList.add('fonts-loaded');
+  }
+  loadFonts();
   return (
     <DashboardContent>
       <Specimen
@@ -58,7 +72,7 @@ export default function FontDashboard(props) {
         specimen={props.font.specimen}
       />
       <FontTester cssname={props.font.cssname} weight={props.font.weight} />
-      <p className='text-left'>
+      <p className='text-left' on>
         Please select the characters you want to mint or select an option of
         pre-selected charsets in the list bellow.
       </p>
