@@ -19,7 +19,7 @@ export default function FontData(props) {
           </Link>
         ))}
       </div>
-      <h6>Font Streams</h6>
+      <h6>FontStreams</h6>
       <div className={classes.about}>
         {props.font.streams.map((stream, i) => (
           <a key={`stream-${i}`}>{stream}</a>

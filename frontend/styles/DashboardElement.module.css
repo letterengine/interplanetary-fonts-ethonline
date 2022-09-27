@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   display: flex;
+  align-items: center;
   gap: 1rem;
   justify-content: space-between;
   border: 4px solid var(--darkblue);

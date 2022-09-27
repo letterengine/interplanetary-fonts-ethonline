@@ -26,6 +26,10 @@
   align-self: flex-start;
 }
 
+.unwrap {
+  padding: 0.25rem;
+}
+
 @media (hover) {
   .active:hover {
     border-color: var(--yellow);
