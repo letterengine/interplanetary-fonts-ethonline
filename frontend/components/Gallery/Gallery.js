@@ -76,7 +76,7 @@ const dummyProjects = [
   },
 ];
 
-export default function Gallery() {
+export default function Gallery(props) {
   const [projects] = useState(dummyProjects);
   return (
     <div className='container max-w-screen-xl flex flex-col flex-wrap md:flex-row gap-5 items-star pl-6 pr-6 pb-12'>

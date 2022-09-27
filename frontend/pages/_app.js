@@ -136,8 +136,20 @@ export default function MyApp({ Component, pageProps }) {
   */
 
   const handleConnected = bool => {
-    setConnected(bool);
-  };
+      setConnected(bool);
+    },
+    loadFonts = async () => {
+      const font = new FontFace(props.font.nme, `url(${props.font.ipfs})`, {
+        style: props.font.style,
+        weight: props.font.weight,
+      });
+      // wait for font to be loaded
+      await font.load();
+      // add font to document
+      document.fonts.add(font);
+      // enable font with CSS class
+      document.body.classList.add('fonts-loaded');
+    };
 
   useEffect(() => {
     const pushNotification = setInterval(() => {
