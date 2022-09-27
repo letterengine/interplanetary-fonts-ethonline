@@ -1,11 +1,11 @@
 import Head from 'next/head';
 // Components
 import Gallery from '../components/Gallery/Gallery';
-import Main from '../components/UI/Main';
+import MainContainer from '../components/UI/MainContainer';
 
 export default function Home() {
   return (
-    <Main>
+    <MainContainer>
       <Head>
         <title>InterplanetaryFonts</title>
         <meta
@@ -17,6 +17,6 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Gallery />
-    </Main>
+    </MainContainer>
   );
 }

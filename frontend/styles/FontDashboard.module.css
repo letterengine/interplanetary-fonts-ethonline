@@ -30,11 +30,12 @@
 }
 
 .specimen h3 {
+  font-size: 4rem;
   color: var(--red);
 }
 
 .specimen p {
-  font-size: 2rem;
+  font-size: 2.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -114,6 +115,14 @@
 }
 
 @media screen and (max-width: 600px) {
+  .specimen p {
+    font-size: 2rem;
+  }
+
+  .specimen h3 {
+    font-size: 3rem;
+  }
+
   .charset-grid {
     grid-template-columns: repeat(8, 1fr);
     gap: 0.5rem 0.5rem;

@@ -31,7 +31,7 @@ const wagmiClient = createClient({
 
 // Components
 import NavBar from '../components/UI/NavBar';
-import Main from '../components/UI/Main';
+import MainContainer from '../components/UI/MainContainer';
 import Notification from '../components/UI/Notification';
 
 // Dummy Data
@@ -136,8 +136,8 @@ export default function MyApp({ Component, pageProps }) {
   */
 
   const handleConnected = bool => {
-      setConnected(bool);
-    },
+    setConnected(bool);
+  }; /*, // Font Load function
     loadFonts = async () => {
       const font = new FontFace(props.font.nme, `url(${props.font.ipfs})`, {
         style: props.font.style,
@@ -149,7 +149,7 @@ export default function MyApp({ Component, pageProps }) {
       document.fonts.add(font);
       // enable font with CSS class
       document.body.classList.add('fonts-loaded');
-    };
+    };*/
 
   useEffect(() => {
     const pushNotification = setInterval(() => {
@@ -173,7 +173,7 @@ export default function MyApp({ Component, pageProps }) {
         })}
         modalSize='compact'
       >
-        <Main>
+        <MainContainer>
           <NavBar handleConnected={handleConnected} />
           <Component
             {...pageProps}
@@ -190,7 +190,7 @@ export default function MyApp({ Component, pageProps }) {
           ) : (
             ''
           )}
-        </Main>
+        </MainContainer>
       </RainbowKitProvider>
     </WagmiConfig>
   );

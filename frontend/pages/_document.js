@@ -7,7 +7,8 @@ export default class MyDocument extends Document {
         <Head />
         <body>
           <Main />
-          <div id='modals' />
+          <div id='backdrop-root' />
+          <div id='overlay-root' />
           <NextScript />
         </body>
       </Html>

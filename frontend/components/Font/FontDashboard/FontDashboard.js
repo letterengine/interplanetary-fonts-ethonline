@@ -8,6 +8,7 @@ import CharsetList from './CharsetList';
 import FontTester from './FontTester';
 import Specimen from './Specimen';
 import MintButton from './MintButton';
+import MintModal from '../../Overlay/MintModal';
 
 export default function FontDashboard(props) {
   const [price, setPrice] = useState(0),
@@ -16,7 +17,8 @@ export default function FontDashboard(props) {
         return { char: ch, checked: false, clss: '' };
       })
     ),
-    [unit] = useState(props.font.price / props.font.charset.length);
+    [unit] = useState(props.font.price / props.font.charset.length),
+    [mounted, setMounted] = useState(false);
   // Event Handler
   const handleLetterClick = e => {
       const char = e.target.textContent,
@@ -48,35 +50,41 @@ export default function FontDashboard(props) {
         });
       setChars(filteredChars);
       setPrice(filteredChars.filter(ch => ch.checked).length * unit);
+    },
+    handleMount = bool => {
+      setMounted(bool);
     };
   // Component
   return (
-    <DashboardContent>
-      <Specimen
-        fontname={props.font.nme}
-        cssname={props.font.cssname}
-        weight={props.font.weight}
-        specimen={props.font.specimen}
-      />
-      <FontTester cssname={props.font.cssname} weight={props.font.weight} />
-      <p className='text-left'>
-        Please select the characters you want to mint or select an option of
-        pre-selected charsets in the list bellow.
-      </p>
-      <CharsetList
-        charsets={props.font.preselect}
-        handleCharList={handleCharList}
-      />
-      <Charset
-        cssname={props.font.cssname}
-        weight={props.font.weight}
-        chars={chars}
-        handleLetterClick={handleLetterClick}
-      />
-      <div className={classes.checkout}>
-        <h5>Price: {price.toFixed(9)} MATIC</h5>
-        <MintButton />
-      </div>
-    </DashboardContent>
+    <>
+      <DashboardContent>
+        <Specimen
+          fontname={props.font.nme}
+          cssname={props.font.cssname}
+          weight={props.font.weight}
+          specimen={props.font.specimen}
+        />
+        <FontTester cssname={props.font.cssname} weight={props.font.weight} />
+        <p className='text-left'>
+          Please select the characters you want to mint or select an option of
+          pre-selected charsets in the list bellow.
+        </p>
+        <CharsetList
+          charsets={props.font.preselect}
+          handleCharList={handleCharList}
+        />
+        <Charset
+          cssname={props.font.cssname}
+          weight={props.font.weight}
+          chars={chars}
+          handleLetterClick={handleLetterClick}
+        />
+        <div className={classes.checkout}>
+          <h5>Price: {price.toFixed(9)} MATIC</h5>
+          <MintButton handleMount={handleMount} />
+        </div>
+      </DashboardContent>
+      <MintModal price={price} handleMount={handleMount} mounted={mounted} />
+    </>
   );
 }

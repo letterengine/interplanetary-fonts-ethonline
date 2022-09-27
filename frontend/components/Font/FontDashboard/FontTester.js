@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import classes from '../../../styles/FontDashboard.module.css';
 
 export default function FontTester(props) {
-  const testerInputRef = useRef('Font Tester');
+  const testerInputRef = useRef();
 
   return (
     <textarea
