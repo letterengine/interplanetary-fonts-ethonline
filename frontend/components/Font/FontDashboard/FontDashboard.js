@@ -63,6 +63,7 @@ export default function FontDashboard(props) {
     document.body.classList.add('fonts-loaded');
   }
   loadFonts();
+  // Component
   return (
     <DashboardContent>
       <Specimen
@@ -72,7 +73,7 @@ export default function FontDashboard(props) {
         specimen={props.font.specimen}
       />
       <FontTester cssname={props.font.cssname} weight={props.font.weight} />
-      <p className='text-left' on>
+      <p className='text-left'>
         Please select the characters you want to mint or select an option of
         pre-selected charsets in the list bellow.
       </p>
