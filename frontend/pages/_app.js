@@ -16,7 +16,7 @@ import { publicProvider } from 'wagmi/providers/public';
 // Wallet connect objects
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
 const { chains, provider } = configureChains(
-  [chain.polygon],
+  [chain.polygonMumbai],
   [infuraProvider({ infuraId }), publicProvider()]
 );
 const { connectors } = getDefaultWallets({
@@ -80,8 +80,8 @@ const fakeUser = {
     funded: [{ txt: 'Some Font Stream', url: '/font/test-font' }],
   },
   fakeFont = {
-    nme: 'Sans Serif',
-    cssname: 'Helvetica',
+    nme: 'Paradisio',
+    cssname: 'Paradisio',
     weight: 700,
     creators: [
       {
@@ -100,12 +100,12 @@ const fakeUser = {
     specimen: [
       'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       'abcdefghijklmnopqrstuvwxyz',
-      '0123456789#?!&·$%()-.,',
+      '0123456789#?!&·()-.,',
     ],
     preselect: ['Custom', 'Uppercase', 'Lowercase', 'Complete'],
     charset:
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·$%()-.,',
-    price: 30,
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·()-.,',
+    price: 0.5,
   };
 
 export default function MyApp({ Component, pageProps }) {
