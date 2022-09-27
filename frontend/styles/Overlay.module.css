@@ -1,0 +1,11 @@
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--yellow);
+  opacity: 0.5;
+}
+
+.modal {
+  padding: 4rem;
+  border-radius: var(--global-radius);
+}

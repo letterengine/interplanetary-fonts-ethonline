@@ -1,6 +1,8 @@
 .container {
   width: 100%;
   display: flex;
+  gap: 1rem;
+  justify-content: space-between;
   border: 4px solid var(--darkblue);
   border-radius: var(--global-radius);
   padding: 0.5rem;
