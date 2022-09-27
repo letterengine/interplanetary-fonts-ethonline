@@ -7,8 +7,9 @@
 
 @font-face {
   font-family: Paradisio;
-  src: url(https://ipfs.io/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf)
+  src: url(https://cloudflare-ipfs.com/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf)
     format('opentype');
+  font-display: swap;
 }
 
 .charset-container {
