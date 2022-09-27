@@ -148,7 +148,7 @@ export default function NavBar(props) {
                           onClick={openChainModal}
                           type='button'
                         >
-                          {chain.hasIcon && (
+                          {/*{chain.hasIcon && (
                             <div
                               style={{
                                 background: chain.iconBackground,
@@ -167,7 +167,7 @@ export default function NavBar(props) {
                                 />
                               )}
                             </div>
-                          )}
+                          )}*/}
                           {chain.name}
                         </button>
                         <Link href={`/user/${account.address}`}>

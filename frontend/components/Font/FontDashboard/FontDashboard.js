@@ -73,7 +73,7 @@ export default function FontDashboard(props) {
         handleLetterClick={handleLetterClick}
       />
       <div className={classes.checkout}>
-        <h5>Price: {price.toFixed(2)} USDC</h5>
+        <h5>Price: {price.toFixed(9)} MATIC</h5>
         <MintButton />
       </div>
     </DashboardContent>
