@@ -22,7 +22,6 @@ export default function FontData(props) {
       <h6>FontStreams</h6>
       <div className={classes.about}>
         {props.font.streams.map((stream, i) => {
-          console.log(stream);
           return (
             <Link key={`p-stream-link-${i}`} href={stream.url} passHref>
               <a>{stream.nme}</a>

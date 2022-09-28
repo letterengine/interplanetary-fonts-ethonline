@@ -1,6 +1,49 @@
+import Link from 'next/link';
+import Button from '../../components/UI/Button';
 import NFTsAndStream from '../../components/UI/NFTsAndStream';
 import classes from '../../styles/NFTsAndStream.module.css';
 
+const fakeNFT = {
+  nme: 'Some NFT',
+  date: new Intl.DateTimeFormat('en-US').format(new Date()),
+  parentp: { nme: 'Some Font', url: '/font/test-font' },
+  owner: 'fontmaniac.eth',
+  files: { otf: true, ttf: true, woff: false, woff2: false },
+};
+
 export default function NFT() {
-  return <NFTsAndStream>NFT</NFTsAndStream>;
+  return (
+    <NFTsAndStream
+      nme={fakeNFT.nme}
+      date={`Minted on ${fakeNFT.date}`}
+      parentp={fakeNFT.parentp}
+    >
+      <div className={classes.element}>
+        Creators <Button>See</Button>
+      </div>
+      <div className={classes.element}>
+        Owner{' '}
+        <Link href={`/user/${fakeNFT.owner}`}>
+          <a>{fakeNFT.owner}</a>
+        </Link>
+      </div>
+
+      <div className={classes.element}>
+        Files{' '}
+        <span className={classes.files}>
+          {Object.entries(fakeNFT.files).map(([key, value], i) => {
+            return (
+              <span className={classes['file-symbol']} key={`nft-span-${i}`}>
+                <span>{key.toUpperCase()}</span>
+                <span>{value ? '✅' : '🛑'}</span>
+              </span>
+            );
+          })}
+        </span>
+      </div>
+      <div className={classes.element}>
+        Charset <Button>Download</Button>
+      </div>
+    </NFTsAndStream>
+  );
 }
