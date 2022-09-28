@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import Link from 'next/link';
+import classes from '../../styles/NFTsAndStream.module.css';
+// Components
 import Button from '../../components/UI/Button';
 import NFTsAndStream from '../../components/UI/NFTsAndStream';
-import classes from '../../styles/NFTsAndStream.module.css';
+import SeePeople from '../../components/Overlay/SeePeople';
+import Download from '../../components/Overlay/Download';
 
 const fakeNFT = {
   nme: 'Some NFT',
@@ -12,38 +16,58 @@ const fakeNFT = {
 };
 
 export default function NFT() {
+  const [clicked, setClicked] = useState(''),
+    [mounted, setMounted] = useState(false),
+    handleMount = bool => {
+      setMounted(bool);
+    };
   return (
-    <NFTsAndStream
-      nme={fakeNFT.nme}
-      date={`Minted on ${fakeNFT.date}`}
-      parentp={fakeNFT.parentp}
-    >
-      <div className={classes.element}>
-        Creators <Button>See</Button>
-      </div>
-      <div className={classes.element}>
-        Owner{' '}
-        <Link href={`/user/${fakeNFT.owner}`}>
-          <a>{fakeNFT.owner}</a>
-        </Link>
-      </div>
+    <>
+      <NFTsAndStream
+        nme={fakeNFT.nme}
+        date={`Minted on ${fakeNFT.date}`}
+        parentp={fakeNFT.parentp}
+      >
+        <div className={classes.element}>
+          Creators{' '}
+          <Button onClick={() => (setMounted(true), setClicked('see'))}>
+            See
+          </Button>
+        </div>
+        <div className={classes.element}>
+          Owner{' '}
+          <Link href={`/user/${fakeNFT.owner}`}>
+            <a>{fakeNFT.owner}</a>
+          </Link>
+        </div>
 
-      <div className={classes.element}>
-        Files{' '}
-        <span className={classes.files}>
-          {Object.entries(fakeNFT.files).map(([key, value], i) => {
-            return (
-              <span className={classes['file-symbol']} key={`nft-span-${i}`}>
-                <span>{key.toUpperCase()}</span>
-                <span>{value ? '✅' : '🛑'}</span>
-              </span>
-            );
-          })}
-        </span>
-      </div>
-      <div className={classes.element}>
-        Charset <Button>Download</Button>
-      </div>
-    </NFTsAndStream>
+        <div className={classes.element}>
+          Files{' '}
+          <span className={classes.files}>
+            {Object.entries(fakeNFT.files).map(([key, value], i) => {
+              return (
+                <span className={classes['file-symbol']} key={`nft-span-${i}`}>
+                  <span>{key.toUpperCase()}</span>
+                  <span>{value ? '✅' : '🛑'}</span>
+                </span>
+              );
+            })}
+          </span>
+        </div>
+        <div className={classes.element}>
+          Charset{' '}
+          <Button onClick={() => (setMounted(true), setClicked('download'))}>
+            Download
+          </Button>
+        </div>
+      </NFTsAndStream>
+      {mounted && clicked === 'see' ? (
+        <SeePeople mounted={mounted} handleMount={handleMount} />
+      ) : mounted && clicked === 'download' ? (
+        <Download mounted={mounted} handleMount={handleMount} />
+      ) : (
+        ''
+      )}
+    </>
   );
 }
