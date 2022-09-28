@@ -4,7 +4,7 @@
 # Interplanetary Fonts
 A decentralized NFT marketplace for creators and collectors of Fonts.
 
-## [ETHOnline 2022](https://online.ethglobal.com/) Hackathon Project
+## [ETHOnline 2022](https://online.ethglobal.com/) Hackathon Finalist Project 🏆
 Project page: https://ethglobal.com/showcase/interplanetary-fonts-ekwuo
 
 Team: [@eduairet](https://github.com/eduairet) [@hyperalchemy](https://github.com/hyperalchemy) [@jsanchez034](https://github.com/jsanchez034) [@miglconts](https://github.com/orgs/letterengine/people/miglconts)
