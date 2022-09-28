@@ -20,7 +20,7 @@ export default function MintModal(props) {
           '0x68a29e1b71177abd38c2a2501b2258db8cc7ed6c1e6c0aae74df6882245f730d',
           'https://ipfs.io/ipfs/QmVgmUWCUpW32JXi9UmS6GNcJjaQ4fJFT5TeozPaMBWn5s?filename=paradisio.json',
           {
-            value: ethers.utils.parseEther(props.price.toFixed(4)),
+            value: ethers.utils.parseEther('0.001'),
             gasLimit: 900000,
           }
         );
