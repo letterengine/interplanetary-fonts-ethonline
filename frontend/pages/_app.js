@@ -103,7 +103,7 @@ const fakeUser = {
     format: 'format',
     streams: [
       { nme: 'Add ligatures', url: '/stream/000001' },
-      { nem: 'Add French Support', url: '/stream/000001' },
+      { nme: 'Add French Support', url: '/stream/000001' },
     ],
     collected: [
       {

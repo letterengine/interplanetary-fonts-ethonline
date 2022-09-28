@@ -29,7 +29,7 @@ export default function Treasury(props) {
         <h5>Active FontStreams</h5>
         {props.elements.fontStreams.map((el, i) => (
           <DashboardElement key={`treasury-streams-${i}`}>
-            <Link href={el.url}>
+            <Link href={el.url} passHref>
               <a>{el.txt}</a>
             </Link>
             <div className={classes['stream-data']}>

@@ -9,7 +9,7 @@ export default function Collabs(props) {
       {props.elements.map((el, i) => (
         <DashboardElement key={`collabs-el-${i}`}>
           <p>{el.txt}</p>
-          <Link href={el.url}>
+          <Link href={el.url} passHref>
             <a>View FontStream</a>
           </Link>
           <p>

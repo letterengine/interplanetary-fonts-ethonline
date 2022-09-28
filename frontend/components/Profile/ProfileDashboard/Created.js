@@ -11,6 +11,7 @@ export default function Created(props) {
     handleMount = bool => {
       setMounted(bool);
     };
+
   return (
     <>
       <div className={classes['profile-elements']}>
