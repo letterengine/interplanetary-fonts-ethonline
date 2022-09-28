@@ -59,25 +59,33 @@ const fakeUser = {
     ],
     collabs: [
       {
-        txt: 'Other User Project FontStream',
-        url: '/font/test-font',
+        txt: 'Bitdoni FontStream',
+        url: '/stream/000001',
         cstatus: true,
       },
       {
-        txt: 'Other User Project FontStream',
-        url: '/font/test-font',
+        txt: 'Blackletther FontStream',
+        url: '/stream/000001',
         cstatus: false,
       },
     ],
     treasury: {
       balance: 3260.108848,
       fontStreams: [
-        { txt: 'Small Caps', ammount: 32.1529387467288193782 },
-        { txt: 'Old Style Figures', ammount: 78.227364004588392097 },
+        {
+          txt: 'Small Caps',
+          ammount: 32.1529387467288193782,
+          url: '/stream/000001',
+        },
+        {
+          txt: 'Old Style Figures',
+          ammount: 78.227364004588392097,
+          url: '/stream/000001',
+        },
       ],
     },
-    collected: [{ txt: 'Some Font Collected', url: '/font/test-font' }],
-    funded: [{ txt: 'Some Font Stream', url: '/font/test-font' }],
+    collected: [{ txt: 'Some Font Collected', url: '/nft/000001' }],
+    funded: [{ txt: 'Some Font Stream', url: '/stream/000001' }],
   },
   fakeFont = {
     nme: 'Paradisio',
@@ -93,7 +101,10 @@ const fakeUser = {
     description: 'Badass Sans Serif Latin Font with English support',
     ipfs: 'https://ipfs.io/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf',
     format: 'format',
-    streams: ['Add ligatures', 'Add French Support'],
+    streams: [
+      { nme: 'Add ligatures', url: '/stream/000001' },
+      { nem: 'Add French Support', url: '/stream/000001' },
+    ],
     collected: [
       {
         username: 'gutentype',

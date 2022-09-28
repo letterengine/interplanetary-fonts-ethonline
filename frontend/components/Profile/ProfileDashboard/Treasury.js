@@ -7,6 +7,7 @@ import Withdraw from '../../Overlay/Withdraw';
 import CreateStream from '../../Overlay/CreateStream';
 import Unwrap from '../../Overlay/Unwrap';
 import StreamByTheSecond from './StreamByTheSecond';
+import Link from 'next/link';
 
 export default function Treasury(props) {
   const [clicked, setClicked] = useState(''),
@@ -28,7 +29,9 @@ export default function Treasury(props) {
         <h5>Active FontStreams</h5>
         {props.elements.fontStreams.map((el, i) => (
           <DashboardElement key={`treasury-streams-${i}`}>
-            <p>{el.txt}</p>
+            <Link href={el.url}>
+              <a>{el.txt}</a>
+            </Link>
             <div className={classes['stream-data']}>
               <StreamByTheSecond stream={el.ammount} />
               <Button
