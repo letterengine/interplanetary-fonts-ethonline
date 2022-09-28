@@ -1,9 +1,7 @@
 const hre = require('hardhat');
 
-const FontProjectJSON = require("../artifacts/contracts/FontProject.sol/FontProject.json");
-const FontProjectABI = FontProjectJSON.abi;
 const { Framework } = require("@superfluid-finance/sdk-core")
-const { deployFramework, deployWrapperSuperToken, deployNativeSuperToken } = require("./utils/deploy-sf.js")
+const { deployFramework, deployNativeSuperToken } = require("./utils/deploy-sf.js")
 
 async function main() {
   const [admin, alice, bob, tom] = await hre.ethers.getSigners();

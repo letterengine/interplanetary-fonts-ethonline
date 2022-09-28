@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 import "./InterPlanetaryFontNFT.sol";
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -156,8 +156,8 @@ contract FontProject {
 
 
     ISETH(superToken).upgradeByETHTo{ value : msg.value }(address(this));
-    console.log("Contract Super ETH Balance", ISuperToken(superToken).balanceOf(address(this)));
-    console.log("Contract Regular Balance", address(this).balance);
+    // console.log("Contract Super ETH Balance", ISuperToken(superToken).balanceOf(address(this)));
+    // console.log("Contract Regular Balance", address(this).balance);
     
     uint256 tokenId = fontNFT.safeMint(msg.sender, uri);
     font.mints.push(tokenId);
@@ -204,7 +204,7 @@ contract FontProject {
 
     uint256 spreaderTokenBalance = font.idaDistributionToken.balanceOf(address(this));
 
-    console.log("spreaderTokenBalance", spreaderTokenBalance);
+    // console.log("spreaderTokenBalance", spreaderTokenBalance);
 
     (uint256 actualDistributionAmount, ) = _idaV1.ida.calculateDistribution(
         font.idaDistributionToken,
@@ -215,6 +215,6 @@ contract FontProject {
 
     _idaV1.distribute(font.idaDistributionToken, font.royaltyIDAIndex, actualDistributionAmount);
 
-    console.log("Contract SETH balance after distribution", ISuperToken(superToken).balanceOf(address(this)));
+    // console.log("Contract SETH balance after distribution", ISuperToken(superToken).balanceOf(address(this)));
   }
 }
