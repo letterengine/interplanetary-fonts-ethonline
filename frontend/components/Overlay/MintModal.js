@@ -35,7 +35,7 @@ export default function MintModal(props) {
       }
     } catch (err) {
       setLoadingState('error');
-      console.log()
+      console.log(err);
     }
   }
 
