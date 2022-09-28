@@ -8,6 +8,7 @@
   "scripts": {
     "compile:smart-contract": "pnpm --filter contracts run compile",
     "deploy:smart-contract": "pnpm --filter contracts run deploy",
+    "verify:smart-contract": "pnpm --filter contracts run verify",
     "test:smart-contract": "pnpm --filter contracts run test",
     "dev:frontend": "pnpm --filter frontend run dev"
   },
