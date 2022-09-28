@@ -1,21 +1,15 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import classes from '../../../styles/FontDashboard.module.css';
 
 export default function FontTester(props) {
-  const [testerValue, setTesterValue] = useState('Font Tester');
-
-  // Event handlers
-
-  const handleType = e => {
-    setTesterValue(e.target.value);
-  };
+  const testerInputRef = useRef();
 
   return (
     <textarea
       style={{ fontFamily: props.cssname, fontWeight: props.weight }}
       className={classes.tester}
-      value={testerValue}
-      onChange={handleType}
+      placeholder='Font Tester'
+      ref={testerInputRef}
     ></textarea>
   );
 }

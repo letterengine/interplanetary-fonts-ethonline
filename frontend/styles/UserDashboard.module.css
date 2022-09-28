@@ -1,7 +1,8 @@
 .buttons {
+  width: 100%;
   display: flex;
+  justify-content: stretch;
   gap: 1rem;
-  align-items: flex-start;
 }
 
 .button {
@@ -17,7 +18,22 @@
 .profile-elements {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.profile-elements h5 {
+  align-self: flex-start;
+}
+
+.stream-data {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.unwrap {
+  padding: 0.25rem;
 }
 
 @media (hover) {
@@ -34,5 +50,8 @@
   }
   .button {
     max-width: 15rem;
+  }
+  .profile-elements {
+    padding-top: 2rem;
   }
 }

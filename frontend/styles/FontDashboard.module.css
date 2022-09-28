@@ -1,3 +1,17 @@
+/* @font-face {
+  font-family: Paradisio;
+  src: url(./Fonts/Paradisio-IF.woff2) format('woff2'),
+    url(./Fonts/Paradisio-IF.woff) format('woff'),
+    url(./Fonts/Paradisio-IF.otf) format('opentype');
+} */
+
+@font-face {
+  font-family: Paradisio;
+  src: url(https://cloudflare-ipfs.com/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf)
+    format('opentype');
+  font-display: swap;
+}
+
 .charset-container {
   display: flex;
 }
@@ -16,11 +30,12 @@
 }
 
 .specimen h3 {
+  font-size: 4rem;
   color: var(--red);
 }
 
 .specimen p {
-  font-size: 2rem;
+  font-size: 2.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -34,6 +49,10 @@
   border-radius: var(--global-radius);
   padding: 1rem;
   font-size: 30px;
+}
+
+.tester::placeholder {
+  color: var(--darkblue);
 }
 
 .charset-list {
@@ -96,6 +115,14 @@
 }
 
 @media screen and (max-width: 600px) {
+  .specimen p {
+    font-size: 2rem;
+  }
+
+  .specimen h3 {
+    font-size: 3rem;
+  }
+
   .charset-grid {
     grid-template-columns: repeat(8, 1fr);
     gap: 0.5rem 0.5rem;

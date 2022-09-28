@@ -16,7 +16,7 @@ import { publicProvider } from 'wagmi/providers/public';
 // Wallet connect objects
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
 const { chains, provider } = configureChains(
-  [chain.polygon],
+  [chain.polygonMumbai],
   [infuraProvider({ infuraId }), publicProvider()]
 );
 const { connectors } = getDefaultWallets({
@@ -31,7 +31,7 @@ const wagmiClient = createClient({
 
 // Components
 import NavBar from '../components/UI/NavBar';
-import Main from '../components/UI/Main';
+import MainContainer from '../components/UI/MainContainer';
 import Notification from '../components/UI/Notification';
 
 // Dummy Data
@@ -52,22 +52,46 @@ const fakeUser = {
       { icon: 'DC', url: 'https://discordapp.com/users/gutentype#5922' },
       { icon: 'IG', url: 'https://www.instagram.com/gutentype' },
     ],
-    created: [{ txt: 'This User Project', url: '/font/test-font' }],
+    created: [
+      { txt: 'Sans Serif', url: '/font/test-font' },
+      { txt: 'Serif', url: '/font/test-font' },
+      { txt: 'Display', url: '/font/test-font' },
+    ],
     collabs: [
-      { txt: 'Other User Project', cstatus: true },
-      { txt: 'Other User Project', cstatus: false },
+      {
+        txt: 'Bitdoni FontStream',
+        url: '/stream/000001',
+        cstatus: true,
+      },
+      {
+        txt: 'Blackletther FontStream',
+        url: '/stream/000001',
+        cstatus: false,
+      },
     ],
     treasury: {
-      balance: 3260.1,
-      fontStreams: [{ txt: 'Some FontStream', ammount: '32.15' }],
+      balance: 3260.108848,
+      fontStreams: [
+        {
+          txt: 'Small Caps',
+          ammount: 32.1529387467288193782,
+          url: '/stream/000001',
+        },
+        {
+          txt: 'Old Style Figures',
+          ammount: 78.227364004588392097,
+          url: '/stream/000001',
+        },
+      ],
     },
-    collected: [{ txt: 'Some Font Collected', url: '/font/test-font' }],
-    funded: [{ txt: 'Some Font Stream' }],
+    collected: [{ txt: 'Some Font Collected', url: '/nft/000001' }],
+    funded: [{ txt: 'Some Font Stream', url: '/stream/000001' }],
   },
   fakeFont = {
-    nme: 'Sans Serif',
-    cssname: 'Helvetica',
-    weight: 700,
+    nme: 'Paradisio',
+    cssname: 'Paradisio',
+    style: 'normal',
+    weight: 400,
     creators: [
       {
         username: 'gutentype',
@@ -75,7 +99,12 @@ const fakeUser = {
       },
     ],
     description: 'Badass Sans Serif Latin Font with English support',
-    streams: ['Add ligatures', 'Add French Support'],
+    ipfs: 'https://ipfs.io/ipfs/QmWC2TeLHdDpKCu8Rip4fjZv1yXvgLBvp8AV7oa54Ajsf6?filename=Paradisio-IF.otf',
+    format: 'format',
+    streams: [
+      { nme: 'Add ligatures', url: '/stream/000001' },
+      { nme: 'Add French Support', url: '/stream/000001' },
+    ],
     collected: [
       {
         username: 'gutentype',
@@ -85,12 +114,12 @@ const fakeUser = {
     specimen: [
       'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       'abcdefghijklmnopqrstuvwxyz',
-      '0123456789#?!&·$%()-.,',
+      '0123456789#?!&·()-.,',
     ],
     preselect: ['Custom', 'Uppercase', 'Lowercase', 'Complete'],
     charset:
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·$%()-.,',
-    price: 30,
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#?!&·()-.,',
+    price: 0.5,
   };
 
 export default function MyApp({ Component, pageProps }) {
@@ -119,7 +148,19 @@ export default function MyApp({ Component, pageProps }) {
 
   const handleConnected = bool => {
     setConnected(bool);
-  };
+  }; /*, // Font Load function
+    loadFonts = async () => {
+      const font = new FontFace(props.font.nme, `url(${props.font.ipfs})`, {
+        style: props.font.style,
+        weight: props.font.weight,
+      });
+      // wait for font to be loaded
+      await font.load();
+      // add font to document
+      document.fonts.add(font);
+      // enable font with CSS class
+      document.body.classList.add('fonts-loaded');
+    };*/
 
   useEffect(() => {
     const pushNotification = setInterval(() => {
@@ -143,7 +184,7 @@ export default function MyApp({ Component, pageProps }) {
         })}
         modalSize='compact'
       >
-        <Main>
+        <MainContainer>
           <NavBar handleConnected={handleConnected} />
           <Component
             {...pageProps}
@@ -160,7 +201,7 @@ export default function MyApp({ Component, pageProps }) {
           ) : (
             ''
           )}
-        </Main>
+        </MainContainer>
       </RainbowKitProvider>
     </WagmiConfig>
   );

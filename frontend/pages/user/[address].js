@@ -28,15 +28,15 @@ export default function Profile(props) {
         .txt.toLowerCase(),
     getCurrentDashboard = (cb, sp) => {
       return cb === 'created' && sp === 'creator' ? (
-        <Created />
+        <Created elements={props.user.created} />
       ) : cb === 'collabs' && sp === 'creator' ? (
-        <Collabs />
+        <Collabs elements={props.user.collabs} />
       ) : cb === 'treasury' && sp === 'creator' ? (
-        <Treasury />
+        <Treasury elements={props.user.treasury} />
       ) : cb === 'collected' && sp === 'collector' ? (
-        <Collected />
+        <Collected elements={props.user.collected} />
       ) : cb === 'funded' && sp === 'collector' ? (
-        <Funded />
+        <Funded elements={props.user.funded} />
       ) : (
         ''
       );
@@ -78,6 +78,7 @@ export default function Profile(props) {
         return temp;
       });
     };
+
   return (
     <DashboardContainer>
       <ProfileCard
