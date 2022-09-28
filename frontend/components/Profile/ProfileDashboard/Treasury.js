@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classes from '../../../styles/UserDashboard.module.css';
 // Components
 import DashboardElement from '../../UI/DashboardElement';
@@ -6,6 +6,7 @@ import Button from '../../UI/Button';
 import Withdraw from '../../Overlay/Withdraw';
 import CreateStream from '../../Overlay/CreateStream';
 import Unwrap from '../../Overlay/Unwrap';
+import StreamByTheSecond from './StreamByTheSecond';
 
 export default function Treasury(props) {
   const [clicked, setClicked] = useState(''),
@@ -13,12 +14,13 @@ export default function Treasury(props) {
     handleMount = bool => {
       setMounted(bool);
     };
+
   return (
     <>
       <div className={classes['profile-elements']}>
         <DashboardElement>
           <p>Balance</p>
-          <p>{props.elements.balance.toFixed(9)} MATIC</p>
+          <p>{props.elements.balance.toFixed(4)} MATIC</p>
         </DashboardElement>
         <Button onClick={() => (setMounted(true), setClicked('withdraw'))}>
           Withdraw
@@ -27,13 +29,15 @@ export default function Treasury(props) {
         {props.elements.fontStreams.map((el, i) => (
           <DashboardElement key={`treasury-streams-${i}`}>
             <p>{el.txt}</p>
-            <p>{el.ammount.toFixed(18)} MATIC</p>
-            <Button
-              onClick={() => (setMounted(true), setClicked('unwrap'))}
-              className={classes.unwrap}
-            >
-              Unwrap
-            </Button>
+            <div className={classes['stream-data']}>
+              <StreamByTheSecond stream={el.ammount} />
+              <Button
+                onClick={() => (setMounted(true), setClicked('unwrap'))}
+                className={classes.unwrap}
+              >
+                Unwrap
+              </Button>
+            </div>
           </DashboardElement>
         ))}
         <Button onClick={() => (setMounted(true), setClicked('stream'))}>

@@ -78,6 +78,7 @@ export default function Profile(props) {
         return temp;
       });
     };
+
   return (
     <DashboardContainer>
       <ProfileCard

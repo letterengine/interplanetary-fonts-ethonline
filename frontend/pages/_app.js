@@ -70,10 +70,10 @@ const fakeUser = {
       },
     ],
     treasury: {
-      balance: 3260.1,
+      balance: 3260.108848,
       fontStreams: [
-        { txt: 'Some FontStream', ammount: 32.15 },
-        { txt: 'Some FontStream', ammount: 78.2 },
+        { txt: 'Small Caps', ammount: 32.1529387467288193782 },
+        { txt: 'Old Style Figures', ammount: 78.227364004588392097 },
       ],
     },
     collected: [{ txt: 'Some Font Collected', url: '/font/test-font' }],

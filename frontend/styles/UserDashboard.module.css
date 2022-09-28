@@ -26,6 +26,12 @@
   align-self: flex-start;
 }
 
+.stream-data {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .unwrap {
   padding: 0.25rem;
 }

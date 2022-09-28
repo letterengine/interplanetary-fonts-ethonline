@@ -10,7 +10,7 @@ export default function MintModal(props) {
       <Modal mounted={props.mounted} handleMount={props.handleMount}>
         <div className={classes['modal-content']}>
           <p>
-            <strong>Price:</strong> {props.price} MATIC
+            <strong>Price:</strong> {props.price.toFixed(4)} MATIC
           </p>
           <Button>Mint</Button>
         </div>
