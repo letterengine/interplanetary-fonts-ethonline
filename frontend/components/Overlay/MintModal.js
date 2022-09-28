@@ -54,7 +54,7 @@ export default function MintModal(props) {
           {(isMinting || isMinted) && txnHash ? (
             <p>
               ⛓
-              <a href={`${process.env.NEXT_PUBLIC_TESTNET_EXPLORER_URL}${txnHash}`} target='blank'>
+              <a href={`${process.env.NEXT_PUBLIC_TESTNET_EXPLORER_URL}tx/${txnHash}`} target='blank'>
                 Click here
               </a>
               to check the status of your mint 
