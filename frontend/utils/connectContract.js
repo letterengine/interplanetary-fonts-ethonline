@@ -1,8 +1,9 @@
-import abiJSON from "./IPFonts.json";
+import abiJSON from "./FontProject.json";
 import { ethers } from "ethers";
 
+const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+
 function connectContract() {
-  const contractAddress = "[CONTRACT_ADDRESS]";
   const contractABI = abiJSON.abi;
   let fontContract;
   try {
@@ -12,7 +13,7 @@ function connectContract() {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
       console.log("contractABI", contractABI);
-      rsvpContract = new ethers.Contract(
+      fontContract = new ethers.Contract(
         contractAddress,
         contractABI,
         signer
